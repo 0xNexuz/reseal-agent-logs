@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reseal"
+version = "0.0.1"
+description = "Adversarial tests for tamper-evident audit logs of AI agents"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "halo-record",
+  "witnesskit",
+  "signet-auth",
+  "obsigna",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+reseal = "reseal.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reseal*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
