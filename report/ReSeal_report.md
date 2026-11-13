@@ -6,7 +6,7 @@ With Apart Research. Research conducted at the AI x Epistemics Research Sprint, 
 
 ## Abstract
 
-Open-source tools now promise "tamper-evident" logs of what an AI agent did, and ship a verifier that prints a pass verdict. We test whether that verdict changes when the log is changed. ReSeal records one seeded agent workload through five such tools and an unprotected baseline, applies 14 kinds of tampering, and asks each tool's own verifier to judge the result, in its default setup and in its strongest documented setup. Outcomes are deterministic, so the evidence is 864 distinct test cells, each repeated over five seeds and re-checked at a second log length. Each tool's documented claims are coded twice, independently, and compared with what its verifier did. Four of five tools refuse every edited, reordered, inserted or backdated record. In the default setup all five accept a truncated log, a log rebuilt by the operator with the real keys, and a forked history. Three refuse these once a head hash or record count is held outside the operator. One has no verifier option for that, and one accepts altered records outright and is reported unnamed. We then add a small, tool-agnostic outside checkpoint, a record count and a prefix digest. With it every tool, and even the unprotected baseline, refuses all tampering that falls before the checkpoint. A pass verdict from a default setup shows that a log is consistent with itself, not that it is the log that was written. The missing layer is small, and it has to live outside the operator.
+Open-source tools now promise "tamper-evident" logs of what an AI agent did, each with a verifier that prints a pass verdict. We test whether that verdict changes when the log is changed. ReSeal records one seeded agent workload through five such tools and an unprotected baseline, applies 14 kinds of tampering, and asks each tool's own verifier to judge the result, in its default and its strongest documented setup. Outcomes are deterministic: 1,959 distinct test cells, each repeated on five seeds. Each tool's documented claims are coded twice and compared with its verifier's behaviour. Four of five tools refuse every edited, reordered, inserted or backdated record. By default all five accept a truncated log, a log rebuilt by the operator with the real keys, and a forked history. Three refuse these once a head hash or record count is held outside the operator, one has no verifier option for that, and one accepts altered records outright (reported unnamed). Documentation and behaviour part mostly at the last record: three named tools say they detect deletion and accept deletion of the final record. We then add a tool-agnostic outside checkpoint: a record count and a prefix digest. With it every tool, even the unprotected baseline, refuses every change to the records it covers. A pass verdict from a default setup shows that a log is consistent with itself, not that it is the log that was written. The missing layer is small, and it has to live outside the operator.
 
 ## 1. Introduction
 
@@ -23,7 +23,7 @@ This matters for AI safety because agent logs are evidence. Incident review, ove
 1. ReSeal, an open harness that records one seeded agent workload through each tool's own API, applies 14 kinds of tampering, and asks the tool's own verifier for a verdict.
 2. A head-to-head measurement of five shipped tools and a baseline under the same attacks. To our knowledge it is the first to run each tool's own verifier against one tampering suite.
 3. A claims-versus-behaviour comparison, coded twice, giving one Claims Card per tool.
-4. A tested answer to the Track 2 question: a count and a prefix digest held outside the operator close every gap we measured, for every tool, up to the last checkpoint.
+4. A tested answer to the Track 2 question: a count and a prefix digest held outside the operator close every gap we measured in what the checkpoint covers, for every tool.
 
 ## 2. Related Work
 
@@ -61,21 +61,23 @@ This matters for AI safety because agent logs are evidence. Incident review, ove
 
 **Attacks.** Fourteen attacks, A1 to A14 (Appendix C maps them to Figure 1's rows). Nine edit stored records: change an argument, flip a policy verdict, delete, truncate, swap, insert, replay, backdate, or strip integrity fields. One changes every stored field of one record, one field at a time. Two rebuild the whole log through the tool's own recorder, without and with the real keys. One forks the history. The last is the control. Positional attacks run at the first, middle, penultimate and final record.
 
-**Benign controls.** Five harmless changes measure false alarms: a load and re-save through our harness, a file copy, CRLF line endings, re-serialised JSON, and a trailing newline.
+**Benign controls.** Five harmless changes measure false alarms: a harness load and re-save, a file copy, CRLF line endings, re-serialised JSON, and a trailing newline.
 
-**Unit of evidence.** Verifiers are deterministic. One *cell* is one tool, setup, attack, variant and position. Five seeds and a second log length (100 events, five other seeds) are replicates that test whether an outcome depends on content or length. They are not independent samples, so we report exact counts and no significance tests.
+**Unit of evidence.** Verifiers are deterministic. One *cell* is one tool, setup, attack, variant and position. Five seeds and a second log length (100 events, five other seeds) are replicates that test whether an outcome depends on content or length. They are not independent samples, so we report exact counts.
 
-**Claims coding.** For each tool we saved the README packaged with the tested version, plus the limits or security document that README points to. Each statement about tampering was coded as property, attacker and strength: *claims*, *claims with setup*, or *disclaims*. No statement means *silent*. Two coders worked from a written codebook. Coder 1 was the AI assistant that built the harness, and it had seen pilot results. Coder 2 was a separate instance of the same model that was given only the codebook and the saved documents, with no access to code or results. We report Cohen's kappa on the governing statement for each tool and property (55 cells), and we report every disagreement.
+**Claims coding.** For each tool we saved the README packaged with the tested version, plus the limits or security document that README points to. Each statement about tampering was coded as property, attacker and strength: *claims*, *claims with setup*, or *disclaims*. No statement means *silent*. Two coders worked from a written codebook. Coder 1 was the AI assistant that built the harness, and it had seen pilot results. Coder 2 was a separate instance of the same model that was given only the codebook and the saved documents, with no access to code or results. halo-record's LIMITS.md was saved after coder 1 had finished, so only coder 2 coded it. We report Cohen's kappa on the governing statement for each tool and property (55 cells), and we report every disagreement.
 
-**Labels.** Each tool, property and setup gets one label. *Claim holds*: the documentation claims detection and the verifier detects. *Disclosed limit*: the documentation says the tampering is not detected, or needs extra setup, and it is missed. *Caught, not claimed*: detected although the documentation is silent or disclaims it. *Silent miss*: missed and never mentioned. *Claim not met*: the documentation claims detection and the verifier accepts the log. Where a headline and a specific statement disagree, the specific one governs. Because that rule matters, we also report a *strict reading*, in which any unconditional claim governs and deleting the last record counts as deletion, not truncation.
+**Labels.** Each tool, property and setup gets one label. *Claim holds*: the documentation claims detection and the verifier detects. *Disclosed limit*: the documentation says the tampering is not detected, or needs extra setup, and it is missed. *Caught, not claimed*: detected although the documentation is silent or disclaims it. *Silent miss*: missed and never mentioned. *Claim not met*: the documentation claims detection and the verifier accepts the log. Two rules were fixed on 13 November, after the pilot and before the reported run: a specific statement governs over a headline, and where several statements apply the most cautious one governs. The codebook, written before the sprint, counts every deletion as deletion, and our main labels follow it. Section 4.3 also gives the result when deletion of the last record is counted as truncation.
 
-**Harness checks.** @@TESTS@@ tests assert properties of ReSeal itself: clean logs verify, every attack changes the file, the field sweep changes exactly one field, attacks never touch the original or the outside state, the checkpoint accepts a log that only grew, and every coded quote appears word for word in the saved documentation.
+**Harness checks.** Fifty-six tests (48 in the public repository, which lacks the Tool E adapter) assert properties of ReSeal itself: clean logs verify, every attack changes the file, the field sweep changes exactly one field, attacks never touch the original or the outside state, the checkpoint accepts a log that only grew, and every coded quote appears word for word in the saved documentation.
+
+**A correction to the harness.** The checkpoint run exposed a trial that was not an attack: stripping the proof from Tool E's first record changes nothing, because that proof is empty. An earlier draft counted it as a miss. The runner now records such trials as not applicable, Tool E's rows were re-run, and a scan of every tool, attack and position found no other case.
 
 **What did not work.** Signet offers server co-signed receipts, which looked like a stronger setup. Its Python SDK refuses to append them to the audit log (a type error), so they are not part of the audit log's verification and were left out.
 
 ## 4. Results
 
-The main run covers 864 cells (default and strong setups), each run on five seeds: 4,212 trials, of which 30 are benign controls that do not apply to a tool's file format. Every clean log was accepted before any attack ran. No cell changed outcome between seeds, and the 100-event run agreed with the main run in all 840 cells they share. No benign control raised a false alarm in any setup (0 of 220 applicable trials in the main run, 0 of @@CTL_LAYER@@ in the checkpoint run). The checkpoint run adds @@LAYER_TRIALS@@ trials.
+The main run covers 864 cells (default and strong setups), each run on five seeds: 4,212 trials, of which 40 are recorded as not applicable (30 benign controls that do not fit a tool's file format, and 10 attacks that change nothing, explained in Section 3). Every clean log was accepted before any attack ran. No cell changed outcome between seeds, and the 100-event run agreed with the main run in all 840 cells they share. No benign control raised a false alarm in any setup (0 of 220 applicable trials in the main run, 0 of 295 in the checkpoint run). The checkpoint run adds 1,095 cells and 5,286 trials.
 
 ### 4.1 What the verifiers did
 
@@ -83,88 +85,80 @@ The main run covers 864 cells (default and strong setups), each run on five seed
 
 **Rebuild without the keys.** WitnessKit and Agent Receipts refused every rebuilt log, because their quick start already takes the issuer's public key. halo-record and Signet accepted every one. halo-record's chain is unsigned, and its README says so. Signet's default checks use the public key carried inside each receipt.
 
-**Operator.** In the default setup all five tools accepted every log rebuilt with the real keys and every forked history. In the strong setup halo-record, WitnessKit and Agent Receipts refused all of them, and also refused truncation. Signet's strongest documented setup, a pinned key, cannot help against the key holder and still accepted truncation. Tool E has no stronger setup.
+**Operator.** In the default setup all five tools accepted every log rebuilt with the real keys and every forked history. In the strong setup halo-record, WitnessKit and Agent Receipts refused all of them, and also refused truncation. Signet's strongest documented setup, a pinned key, cannot help against the key holder and still accepted truncation; its audit verifier takes no expected count, although its security page says truncation is "Detectable if expected record count is known". Tool E has no stronger setup.
 
-**Field coverage.** halo-record, WitnessKit and Signet refused a change to any stored field. Agent Receipts accepted changes to three fields inside its proof block (creation time, purpose, key reference). Its README notes that the receipt hash excludes the proof block, so this is a design choice, and the receipt's own time and issuer fields are covered. Tool E accepted changes to 7 of its 27 stored fields: agent identifier, index, query hash, response hash, root hash, timestamp and tool name. It also accepted a record with its integrity fields stripped when that record was the first one.
+**Field coverage.** halo-record, WitnessKit and Signet refused a change to any stored field. Agent Receipts accepted changes to three fields inside its proof block (creation time, purpose, key reference). Its README notes that the receipt hash excludes the proof block, so this is a design choice, and the receipt's own time and issuer fields are covered. Tool E accepted changes to 7 of its 27 stored fields: agent identifier, index, query hash, response hash, root hash, timestamp and tool name.
 
 **Control.** No setup flagged an action that was never recorded, as expected.
 
-![Three panels showing, for ten kinds of tampering and six columns, whether each verifier refused all, none or some tampered logs, in the default setup, the strongest documented setup, and the default setup with an outside checkpoint](../results/fig_main.png)
-
-*Figure 1. What each tool's own verifier refused. Left: default setup. Middle: strongest documented setup. Right: default setup plus the ReSeal checkpoint, taken after the last record. Each cell pools five seeds; a fraction is tampered logs refused out of tampered logs shown, and for the field sweep it is fields.*
-
 ### 4.2 The outside checkpoint
 
-With a checkpoint taken after the last record, every tool refused every tampered log in every attack except the control (Figure 1, right). That includes Signet, whose own verifier has no option for it, Tool E, and the unprotected baseline. @@CP_SENTENCE@@
+With a checkpoint taken after the last record (Figure 1C), every tool refused every change to the recorded log: every edit, deletion, truncation, swap, rebuild and fork. That includes Signet, whose own verifier has no option for it, Tool E, and the unprotected baseline. In all, 2,149 of 2,169 tampered logs were refused. The 20 accepted are one case: a forged or duplicated record added after the last one, on Tool E and on the baseline, whose own checks accept any record. A checkpoint says nothing about records that arrive after it. Covering those is the job of a chain or a signature, and the four working tools did it.
 
-A checkpoint protects only what it covers. With the stale checkpoint, taken after the first 90% of the log, tampering at the first or middle record was still always refused. Tampering in the uncovered tail fell back to the tool's own default check: @@STALE_SENTENCE@@ The window between checkpoints is therefore the real design parameter, and it is set by how often the outside party is given a new count and digest.
+A checkpoint protects only what it covers (Figure 1D). With the stale checkpoint, no tool accepted any tampering at the first or middle record. In the uncovered tail each tool fell back to its own default check: all six accepted deletion of the last record and truncation, WitnessKit accepted operator rewrites and forks there, and Tool E and the baseline accepted every outside edit. Panel D flatters the other tools on rebuilds. Our rebuild re-records the whole log, and those tools put fresh identifiers or times in every record, so the covered part changed too. An operator who kept the covered part and rebuilt only the tail would pass, as WitnessKit's row shows. The window between checkpoints is therefore the real design parameter, and it is set by how often the outside party receives a new count and digest.
+
+![Four panels showing, for ten kinds of tampering and six columns, whether each verifier refused all, none or some tampered logs: default setup, strongest documented setup, default with an outside checkpoint, and default with a stale checkpoint](../results/fig_main.png)
+
+*Figure 1. What each tool's own verifier refused. A: default setup. B: strongest documented setup. C: default setup plus the ReSeal checkpoint, taken after the last record. D: the same with a stale checkpoint that covers the first 90% of the log. Each cell pools five seeds. A fraction is tampered logs refused out of tampered logs shown; for the field sweep it is fields.*
 
 ### 4.3 Claims versus behaviour
 
-The two codings agreed on @@AGREE@@ of 55 cells (Cohen's kappa @@KAPPA@@). @@KAPPA_SENTENCE@@ Table 2 uses coder 1's sheet; Appendix C lists every cell where coder 2 differs.
+The two codings agreed on 37 of 55 cells (Cohen's kappa 0.52). That is below the 0.6 we set in advance, so, as planned for that case, counts are given under both codings. Table 2 shows coder 1's sheet, and Appendix C lists every cell where coder 2 differs.
 
 | Tool | Claim holds | Disclosed limit | Caught, not claimed | Silent miss | Claim not met |
 | --- | --- | --- | --- | --- | --- |
-| halo-record | 3 | 5 | 3 | 0 | 0 |
-| WitnessKit | 6 | 2 | 1 | 2 | 0 |
-| Signet | 3 | 4 | 3 | 1 | 0 |
-| Agent Receipts | 3 | 1 | 4 | 3 | 0 |
-| Tool E | 0 | 0 | 0 | 9 | 2 |
+| halo-record | 2 | 6 | 3 | 0 | 0 |
+| WitnessKit | 5 | 2 | 1 | 2 | 1 |
+| Signet | 2 | 4 | 3 | 1 | 1 |
+| Agent Receipts | 2 | 1 | 4 | 3 | 1 |
+| Tool E | 0 | 0 | 1 | 8 | 2 |
 
-*Table 2. Default setup: eleven kinds of tampering per tool, labelled by what the documentation says and what the verifier did. Appendix C has the strong setup and the quotes.*
+*Table 2. Default setup, coder 1: eleven kinds of tampering per tool, labelled by what the documentation says and what the verifier did. Appendix C has the strong setup and the quotes.*
 
-For the four named tools, no claim failed under the main rule. Their 18 default-setup misses split into 12 that the documentation discloses and 6 it does not mention: a forked history (WitnessKit, Signet, Agent Receipts), capture omission (WitnessKit, Agent Receipts) and truncation (Agent Receipts).
+The four named tools miss 22 of their 44 default-setup cells. Coder 1 reads 13 of these as disclosed, 6 as silent and 3 as claims not met. Coder 2 reads 10, 8 and 4. On either sheet most misses are disclosed and outright failures are few.
 
-Under the strict reading, three more claims are not met in the default setup. All three are deletion claims that fail on the final record: WitnessKit ("Delete an entry | sequence-number gap + broken prev_hash link"), Signet ("Delete or reorder entries and the SHA-256 hash chain breaks.") and Agent Receipts ("The receipt chain shows exactly which actions it took, in what order"). In the strong setup only Signet's remains. Signet's security page does say that truncation is "Detectable if expected record count is known", but its audit verifier takes no expected count, so keeping and comparing it is left to the user.
+The failures sit at the last record. All three of coder 1's are deletion claims: WitnessKit ("Delete an entry | sequence-number gap + broken prev_hash link"), Signet ("Delete or reorder entries and the SHA-256 hash chain breaks.") and Agent Receipts ("The receipt chain shows exactly which actions it took, in what order"). Each tool refuses a deletion anywhere else and accepts deletion of the final record. Coder 2 agrees on WitnessKit, reads the other two texts differently, and adds two for halo-record (from a demo instruction and a section title) and one for Signet (a line that receipts "were created by the holder of the signing key", against a rebuild with other keys).
 
-Tool E's README says, in paraphrase, that each call gets a proof that cannot be forged or altered afterwards. Its verifier accepted altered records and logs rebuilt without the original keys. These two claims fail under either reading.
+How the final record is counted matters, and we changed our minds about it. During the sprint we first counted its deletion as truncation, since the two are byte for byte the same. On that reading WitnessKit and Signet have disclosed it, because both say truncation needs an expected head or count, Agent Receipts is silent, and none of coder 1's claims fails. The codebook says otherwise, so Table 2 follows the codebook.
+
+Tool E's README says, in paraphrase, that each call gets a proof that cannot be forged or altered afterwards. Its verifier accepted altered records and logs rebuilt without the original keys. Both coders mark both claims as not met.
 
 ### 4.4 Hypotheses
 
-| | Hypothesis (written 8 to 9 Nov) | Result |
-| --- | --- | --- |
-| H1 | Defaults catch naive edits but accept an operator rewrite; catching it needs state held outside the operator | Supported. 4 of 5 catch naive edits, 5 of 5 accept the rewrite, 3 of 5 refuse it with their own outside state, 5 of 5 with the checkpoint |
-| H2 | Truncation and final-record deletion are the most common misses without outside state | Supported. They are the only outside-editor misses of the four tools that catch edits, and all five miss them |
-| H3 | Headline wording claims more than the tool's own limits section | Partly. Clear for Signet and Tool E. halo-record and WitnessKit put the limit next to the headline |
-| H4 | At least one verifier accepts a changed stored field or stripped integrity fields | Supported. Tool E (7 fields), Agent Receipts (3 proof-metadata fields, by design) |
-
-*Table 3. Hypotheses committed before the reported run, and outcomes.*
+Four hypotheses were committed before the reported run (Table 3, Appendix B). Three were supported: defaults catch naive edits but accept an operator rewrite (H1), truncation and final-record deletion are the common misses without outside state (H2), and at least one verifier accepts a changed stored field (H4). One was supported only in part: headline wording claims more than the limits section (H3) clearly for Tool E, and for the named tools only at the last record.
 
 ## 5. Discussion and Limitations
 
-**What is new here.** That a self-held chain cannot stop its key holder is known [2], and the better-documented tools say so. The measurements add three things. First, which shipped tools close the gap and which do not: three can, one cannot, one fails earlier. Second, where documentation and behaviour part: mostly in silence about forks and the final record, and in one tool outright. Third, how small the missing layer is. A count and a digest held by a second party gave an unprotected log the same refusals as the best tool.
+**What is new here.** That a self-held chain cannot stop its key holder is known [2], and the better-documented tools say so. The measurements add three things. First, which shipped tools close the gap and which do not: three can, one cannot, one fails earlier. Second, where documentation and behaviour part: mostly in silence about forks and the final record, and in one tool outright. Third, how small the missing layer is. A count and a digest held by a second party made an unprotected log refuse every change to the records they cover.
 
-**For people who rely on agent logs.** Ask who holds the head. A verify result that uses only what the operator stores is evidence against an outside editor and nothing more.
-
-**For tool builders.** Print what was not checked next to the pass verdict; halo-record already does. Put the expected head or count in the quick start. Say on the first screen that the default cannot see truncation or a fork.
+**Implications.** Whoever relies on an agent log should ask who holds the head. A verify result that uses only what the operator stores is evidence against an outside editor and nothing more. Tool builders can print what was not checked next to the pass verdict, as halo-record already does, put the expected head or count in the quick start, and say on the first screen that the default cannot see truncation or a fork.
 
 **For standards.** A format that requires chaining and leaves anchoring optional [3] describes the default setups we tested. For telemetry, the two checkpoint values could ride on existing spans as a periodic event sent to a collector the operator does not control. `docs/OTEL_MAPPING.md` sketches this for the OpenTelemetry GenAI conventions [11]. We did not test it with an OpenTelemetry SDK; the plain-log baseline with a checkpoint is the tested stand-in.
 
 **Limitations.**
 
-- Five tools, one version each, chosen by us from tools with an offline verifier on PyPI. Hosted services and other language SDKs are untested, and we have no adoption data.
+- Five tools, one version each, chosen by us from tools with an offline verifier on PyPI. Hosted services and other language SDKs are untested, we have no adoption data, and deterministic outcomes support no claim beyond these versions and attacks.
 - The workload is synthetic. The results describe verifiers, not real deployments.
 - Outside state is assumed honest and intact. We do not test an attacker who can replace it, key theft, or the cryptography. The checkpoint moves trust to whoever holds it.
-- Both claim coders are instances of one AI model. Coder 2 was blind to code and results but is not a human reader, and no human coded the documents independently.
-- Outcomes are deterministic. There is no sampling error, and also no claim beyond these versions and these attacks.
+- Both claim coders are instances of one AI model, and they agree only moderately. Coder 2 was blind to code and results but is not a human reader. Labels in Table 2 are one coder's reading, and the ranges in Section 4.3 are the honest summary.
 - Tool E is unnamed, so readers cannot reproduce its column yet. A SHA-256 commitment to its adapter is published so the later release can be checked, and the sprint organisers can have the name and adapter on request (Appendix A).
 - We did not measure cost or latency, and Agent Flight Recorder, the closest prior system, was not run.
 
-**Future work.** A human claims coder. More tools, including hosted ones and Agent Flight Recorder. Attacks on the checkpoint holder. The telemetry mapping, built and tested.
+**Future work.** A human claims coder, more tools including hosted ones, attacks on the checkpoint holder, and the telemetry mapping built and tested.
 
 ## 6. Conclusion
 
-We ran one tampering suite against five open-source agent audit-log tools and compared each verifier with its own documentation. Four of the five catch every naive edit. In the default setup all five accept a truncated log, a log rewritten by the operator, and a forked history. Three of them refuse all of these once a head hash, a count or a checkpoint is held by someone else, and with a 40-line outside checkpoint all of them do, as does a log with no protection at all.
+We ran one tampering suite against five open-source agent audit-log tools and compared each verifier with its own documentation. Four of the five refuse every edited, reordered, inserted or backdated record. In the default setup all five accept a truncated log, a log rewritten by the operator, and a forked history. Three of them refuse all of these once a head hash, a count or a checkpoint is held by someone else, and with a 40-line outside checkpoint all of them do, for every record it covers, as does a log with no protection at all.
 
-A "verified" result is only as strong as the state the verifier holds that the operator does not. That state is two numbers. ReSeal makes the question testable: a new tool needs one adapter to get its own column and its own Claims Card.
+A "verified" result is only as strong as the state the verifier holds that the operator does not. That state can be two numbers. A new tool needs one ReSeal adapter to get its own column and Claims Card.
 
 ## Code and Data
 
-Code, the claims sheets, saved documentation snapshots and every trial are in the project repository: github.com/0xNexuz/reseal. It leaves out the Tool E adapter until that tool's maintainer has been told (Appendix A). The file `results/REPORT_NUMBERS.md` recomputes every number in this report from the trial files. No dataset with personal data is used; the workload is synthetic.
+Code, the claims sheets, saved documentation snapshots and every trial are in the project repository: github.com/0xNexuz/reseal. It leaves out the Tool E adapter (Appendix A). The file `results/REPORT_NUMBERS.md` recomputes every number in this report from the trial files. No dataset with personal data is used; the workload is synthetic.
 
 ## Author Contributions
 
-E.E. entered the sprint, directed the work, decided how the unnamed tool's result would be handled, and reviewed and approved this report. The hands-on work was done with an AI assistant, as the LLM Usage Statement describes.
+E.E. entered the sprint, commissioned and oversaw the work, decided how the unnamed tool's result would be handled, and reviewed and approved this report. The hands-on work was done with an AI assistant, as the LLM Usage Statement describes.
 
 ## References
 
@@ -198,7 +192,7 @@ E.E. entered the sprint, directed the work, decided how the unnamed tool's resul
 
 **Dual use.** The attacks are ordinary file operations: edit, delete, cut the tail, or rebuild a log with the tool's own library. Anyone who can write to a log can already do them. ReSeal runs them only on logs it creates. A table of what each verifier accepts could still help a dishonest operator choose a weak setup. We think the benefit to auditors, buyers and maintainers is larger, for two reasons. For the four named tools, every miss is either already in the tool's documentation or follows directly from having no state outside the operator. And the remedy is a configuration step, not a secret.
 
-**Disclosure.** Tool E's result looks like a defect and not a documented limit. Its maintainer has not been told at the time of writing. Until that happens we withhold its name, its version, verbatim quotes from its documentation and the steps to reproduce the result, and the public repository leaves out its adapter and its documentation snapshot. Its trial rows are published without name, version or verifier messages. To keep this checkable, `results/TOOL_E_COMMITMENT.md` publishes a SHA-256 digest of the withheld adapter, so that the file released later can be matched to the one used here, and the sprint organisers can have the name and the adapter on request. This still costs public reproducibility for one of five columns. We accept that cost.
+**Disclosure.** Tool E's result looks like a defect and not a documented limit. Its maintainer has not been told, and no report is scheduled at the time of writing. While that is so we withhold its name, its version, verbatim quotes from its documentation and the steps to reproduce the result, and the public repository leaves out its adapter and its documentation snapshot. Its trial rows are published without name, version or verifier messages. To keep this checkable, `results/TOOL_E_COMMITMENT.md` publishes a SHA-256 digest of the withheld adapter, so that the file released later can be matched to the one used here, and the sprint organisers can have the name and the adapter on request. This still costs public reproducibility for one of five columns. We accept that cost.
 
 **Fairness to maintainers.** Results for the named tools concern documented behaviour of public releases on one date. Documentation changes, so each quote carries a version or commit. Three of the four named tools state most of their limits clearly, and the report says so. These are small, young projects, and nothing here is evidence about their use in production.
 
@@ -218,10 +212,19 @@ The harness was built before the sprint and is marked as pre-existing in the rep
 | 11 Nov | Template read; one pilot observation re-checked with a standalone script | Pre-existing |
 | 13 to 15 Nov | Both claim codings, every run reported here, the baseline, the checkpoint, the claims-versus-behaviour analysis, Claims Cards, figure, and this report | Sprint work |
 
+| | Hypothesis (written 8 to 9 Nov) | Result |
+| --- | --- | --- |
+| H1 | Defaults catch naive edits but accept an operator rewrite; catching it needs state held outside the operator | Supported. 4 of 5 catch naive edits, 5 of 5 accept the rewrite, 3 of 5 refuse it with their own outside state, 5 of 5 with the checkpoint |
+| H2 | Truncation and final-record deletion are the most common misses without outside state | Supported. They are the only outside-editor misses of the four tools that catch edits, and all five miss them |
+| H3 | Headline wording claims more than the tool's own limits section | Partly. Clear for Tool E. For the named tools it shows only at the last record, and the coders agree on one case of three |
+| H4 | At least one verifier accepts a changed stored field or stripped integrity fields | Supported. Tool E (7 fields), Agent Receipts (3 proof-metadata fields, by design) |
+
+*Table 3. Hypotheses committed before the reported run, and outcomes.*
+
 Hypotheses H1 to H4 were written on 8 and 9 November and committed before the reported runs. The pilot runs mean they were not written blind to all data. No attack, control, workload or named-tool adapter was changed after the pilot. Sprint-day work was committed in batches, so commit times show when work was saved, not when it was done.
 
 <!-- CLAIMS_CARDS -->
 
 ## LLM Usage Statement
 
-An AI assistant (Claude, Anthropic) did most of the hands-on work. It surveyed prior work, proposed the research question, wrote the harness, ran the experiments, produced both claim codings (the second as a separate instance with no access to code or results), ran a mock review of a draft, and drafted this report. The author directed the project, made the disclosure decision, reviewed the results and the text, and takes responsibility for every claim. Every number in the report is recomputed from the trial files by a script in the repository, every coded quote is checked against the saved documents by a test, and every reference was opened and read.
+An AI assistant (Claude, Anthropic) did most of the hands-on work. It surveyed prior work, proposed the research question, wrote the harness, ran the experiments, produced both claim codings (the second as a separate instance with no access to code or results), ran a mock review of a draft, and drafted this report. The author entered the sprint, commissioned and oversaw the work, made the disclosure decision, reviewed the results and the text, and takes responsibility for every claim. Every number in the report is recomputed from the trial files by a script in the repository, every coded quote is checked against the saved documents by a test, and every reference was opened and read.

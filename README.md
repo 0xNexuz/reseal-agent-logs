@@ -126,10 +126,10 @@ python report/build.py                          # the PDF (needs markdown, playw
 
 A fifth tool appears in the results as `tool-e`. Its verifier accepted altered
 records, which looks like a defect and not a documented limit, and its
-maintainer has not been told yet. Until that happens its adapter and its
+maintainer has not been told. While that is so its adapter and its
 documentation snapshot are kept out of this repository, and its rows in
 `trials.csv` carry no name, no version and no verifier messages. A fresh clone
-therefore runs the four named tools and the baseline, and @@PUBTESTS@@ harness tests instead of @@ALLTESTS@@. The
+therefore runs the four named tools and the baseline, and 48 harness tests instead of 56. The
 adapter loads from `private/tool_e.py` when that file is present.
 
 ## Reading a result
