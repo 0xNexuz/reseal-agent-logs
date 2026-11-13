@@ -1,0 +1,500 @@
+{
+  "n_events": 1000,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "setups": [
+    "default",
+    "strong"
+  ],
+  "positions": [
+    "first",
+    "middle",
+    "penultimate",
+    "final"
+  ],
+  "tools": {
+    "halo-record": {
+      "version": "0.2.47",
+      "default_setup": "verify_log() on the JSONL chain (what `halo verify` runs)",
+      "strong_setup": "verify_log() plus verify_completeness() against a witness checkpoint held outside the operator, with the expected subject pinned"
+    },
+    "witnesskit": {
+      "version": "0.1.0",
+      "default_setup": "verify_chain(pack, trusted_keys=[pub]) - the issuer key is pinned, as the README requires",
+      "strong_setup": "default plus expected_head (a head hash held outside the operator)"
+    },
+    "signet": {
+      "version": "0.11.0",
+      "default_setup": "audit_verify_chain(dir) and audit_verify_signatures(dir), no pinned keys (what `signet verify --chain` / `signet audit --verify` run)",
+      "strong_setup": "default plus trusted_agent_keys=[agent public key] held outside the operator"
+    },
+    "agent-receipts": {
+      "version": "0.16.0",
+      "default_setup": "verify_chain(receipts, public_key) - the issuer key is a required argument",
+      "strong_setup": "default plus expected_length and expected_final_hash held outside the operator"
+    },
+    "tool-e": {
+      "version": "",
+      "default_setup": "the SDK's own check on every receipt",
+      "strong_setup": "same as default - no stronger offline check is documented"
+    }
+  },
+  "baselines": [
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "note: this is integrity, not completeness \u2014 a self-held chain cannot show records that were removed and the chain re-sealed, anywhere in it; an external witness (halo anchor --check) is what detects r"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "note: this is integrity, not completeness \u2014 a self-held chain cannot show records that were removed and the chain re-sealed, anywhere in it; an external witness (halo anchor --check) is what detects r"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "note: this is integrity, not completeness \u2014 a self-held chain cannot show records that were removed and the chain re-sealed, anywhere in it; an external witness (halo anchor --check) is what detects r"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "note: this is integrity, not completeness \u2014 a self-held chain cannot show records that were removed and the chain re-sealed, anywhere in it; an external witness (halo anchor --check) is what detects r"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "note: this is integrity, not completeness \u2014 a self-held chain cannot show records that were removed and the chain re-sealed, anywhere in it; an external witness (halo anchor --check) is what detects r"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "strong",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "witnessed and complete"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "strong",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "witnessed and complete"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "strong",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "witnessed and complete"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "strong",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "witnessed and complete"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "strong",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "witnessed and complete"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "strong",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "strong",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "strong",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "strong",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "strong",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "chain intact"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "strong",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "strong",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "strong",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "strong",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "strong",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 records, 1000 signatures valid"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "strong",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "strong",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "strong",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "strong",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "strong",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "broken_at=-1"
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "strong",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "strong",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "strong",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "strong",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "strong",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    }
+  ],
+  "trials": 4212
+}

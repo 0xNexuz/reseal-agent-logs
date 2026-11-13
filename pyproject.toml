@@ -18,6 +18,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
+analysis = ["matplotlib"]
+report = ["markdown", "playwright", "pypdf"]
 
 [project.scripts]
 reseal = "reseal.cli:main"

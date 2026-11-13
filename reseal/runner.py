@@ -21,6 +21,8 @@ FIELDS = ["tool", "version", "setup", "seed", "n", "kind", "id", "name", "tier",
 
 
 def _version(adapter) -> str:
+    if getattr(adapter, "withheld", False):
+        return ""
     try:
         return metadata.version(adapter.package)
     except metadata.PackageNotFoundError:
@@ -57,7 +59,8 @@ def run_matrix(tools=None, seeds=(0,), n=200, setups=("default", "strong"),
 
                 # 0. Sanity: the untouched log must verify.
                 v = _safe_verify(adapter, run.logdir, run.external, strong)
-                baselines.append({**base, "status": v.status, "detail": v.detail[:200]})
+                hide = getattr(adapter, "withheld", False)  # keep an unnamed tool unnamed
+                baselines.append({**base, "status": v.status, "detail": "" if hide else v.detail[:200]})
                 if v.status != ACCEPTED:
                     log(f"!! {tool}/{setup}/seed{seed}: clean log not accepted ({v.status}); skipping")
                     continue
@@ -67,7 +70,7 @@ def run_matrix(tools=None, seeds=(0,), n=200, setups=("default", "strong"),
                                  "variant": variant, "position": position, "applicable": applicable,
                                  "status": verdict.status if verdict else "",
                                  "detected": verdict.detected if verdict else "",
-                                 "detail": (verdict.detail if verdict else "")[:200]})
+                                 "detail": "" if hide else (verdict.detail if verdict else "")[:200]})
 
                 # 1. Attacks.
                 trial = 0

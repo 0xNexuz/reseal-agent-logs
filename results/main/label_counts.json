@@ -1,0 +1,17 @@
+{
+  "default|caught (unstated)": 11,
+  "default|claim not met": 2,
+  "default|disclosed limit": 7,
+  "default|holds": 13,
+  "default|holds without the setup": 2,
+  "default|needs setup (disclosed)": 5,
+  "default|silent miss": 15,
+  "strong|better than stated": 4,
+  "strong|caught (unstated)": 14,
+  "strong|claim not met": 2,
+  "strong|disclosed limit": 3,
+  "strong|holds": 13,
+  "strong|holds with setup": 6,
+  "strong|setup left to the user (disclosed)": 1,
+  "strong|silent miss": 12
+}

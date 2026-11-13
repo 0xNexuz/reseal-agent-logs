@@ -36,11 +36,9 @@ PROPERTIES = [
 # such option, so the strong setup (a pinned key) does not provide it.
 SETUP_NOT_WIRED = {("signet", "truncate")}
 
-PUBLIC_NAME = {"tool-e": "tool-e"}  # the fifth tool is reported unnamed
-
-
 def public(tool: str) -> str:
-    return PUBLIC_NAME.get(tool, tool)
+    """The fifth tool is recorded as ``tool-e`` at the source; nothing to map."""
+    return tool
 
 
 def load_claims(path) -> dict:
@@ -145,7 +143,7 @@ def write_labels(table, out_dir):
     return p
 
 
-def cards(table, meta) -> str:
+def cards(table, meta, claims=None) -> str:
     L = ["# Claims Cards\n",
          "One card per tool. Each row compares what the tool's documentation says with what its "
          "own verifier did in ReSeal. `default` is the quick-start setup; `strong` is the "
@@ -181,6 +179,18 @@ def cards(table, meta) -> str:
             cell = lambda r: "n/a" if r["outcome"] == "n/a" else f"{r['detected']}/{r['trials']}"
             L.append(f"| {d['what']} | {d['attacker']} | {says} | {cell(d)} | {cell(s)} | "
                      f"{d['label']} / {s['label']} |")
+        if claims:
+            seen = []
+            for (t, _prop), rows in claims.items():
+                for r in rows:
+                    item = (r["quote"], r["source"], r["source_version"])
+                    if t == tool and item not in seen:
+                        seen.append(item)
+            if seen:
+                L.append("\nStatements coded:\n")
+                for quote, source, version in seen:
+                    text = quote if quote.startswith("[") else f'"{quote}"'
+                    L.append(f"- {text} ({source}, {version})" if named else f"- {text}")
     return "\n".join(L) + "\n"
 
 
@@ -254,7 +264,7 @@ def main(argv=None):
     table, meta, rows = build(a.out, a.claims)
     print("wrote", write_labels(table, a.out))
     p = Path(a.out) / "CLAIMS_CARDS.md"
-    p.write_text(cards(table, meta), encoding="utf-8")
+    p.write_text(cards(table, meta, load_claims(a.claims)), encoding="utf-8")
     print("wrote", p)
     print("wrote", figure(rows, meta, Path(a.out) / "fig_detection.png"))
     counts = defaultdict(int)

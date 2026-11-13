@@ -3,4 +3,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.egg-info/
-results/
+# the unnamed tool: adapter and documentation snapshot stay out of the repository
+private/
+# runs: only the reported ones are tracked
+results/*
+!results/main/
+!results/robust_n100/
+report/ReSeal_report.html

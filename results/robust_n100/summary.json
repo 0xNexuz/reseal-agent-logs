@@ -1,0 +1,555 @@
+{
+  "attacks": {
+    "A1": {
+      "name": "edit a tool argument",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A2": {
+      "name": "flip a policy verdict",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A3": {
+      "name": "delete one record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "15/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "15/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "15/20",
+          "strong": "15/20"
+        },
+        "agent-receipts": {
+          "default": "15/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A4": {
+      "name": "truncate the tail",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "0/10",
+          "strong": "10/10"
+        },
+        "witnesskit": {
+          "default": "0/10",
+          "strong": "10/10"
+        },
+        "signet": {
+          "default": "0/10",
+          "strong": "0/10"
+        },
+        "agent-receipts": {
+          "default": "0/10",
+          "strong": "10/10"
+        },
+        "tool-e": {
+          "default": "0/10",
+          "strong": "0/10"
+        }
+      }
+    },
+    "A5": {
+      "name": "swap two adjacent records",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A6": {
+      "name": "insert a forged record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A7": {
+      "name": "replay a duplicate record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A8": {
+      "name": "backdate a timestamp",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A10": {
+      "name": "strip integrity fields (downgrade)",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "agent-receipts": {
+          "default": "20/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "15/20",
+          "strong": "15/20"
+        }
+      }
+    },
+    "A11": {
+      "name": "rebuild without the original keys",
+      "tier": "T1+",
+      "cells": {
+        "halo-record": {
+          "default": "0/40",
+          "strong": "40/40"
+        },
+        "witnesskit": {
+          "default": "40/40",
+          "strong": "40/40"
+        },
+        "signet": {
+          "default": "0/40",
+          "strong": "40/40"
+        },
+        "agent-receipts": {
+          "default": "40/40",
+          "strong": "40/40"
+        },
+        "tool-e": {
+          "default": "0/40",
+          "strong": "0/40"
+        }
+      }
+    },
+    "A12": {
+      "name": "operator rewrite with real keys",
+      "tier": "T2",
+      "cells": {
+        "halo-record": {
+          "default": "0/40",
+          "strong": "40/40"
+        },
+        "witnesskit": {
+          "default": "0/40",
+          "strong": "40/40"
+        },
+        "signet": {
+          "default": "0/40",
+          "strong": "0/40"
+        },
+        "agent-receipts": {
+          "default": "0/40",
+          "strong": "40/40"
+        },
+        "tool-e": {
+          "default": "0/40",
+          "strong": "0/40"
+        }
+      }
+    },
+    "A13": {
+      "name": "fork: same prefix, different suffix",
+      "tier": "T3",
+      "cells": {
+        "halo-record": {
+          "default": "0/20",
+          "strong": "20/20"
+        },
+        "witnesskit": {
+          "default": "0/20",
+          "strong": "20/20"
+        },
+        "signet": {
+          "default": "0/20",
+          "strong": "0/20"
+        },
+        "agent-receipts": {
+          "default": "0/20",
+          "strong": "20/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    },
+    "A14": {
+      "name": "capture omission (boundary control)",
+      "tier": "boundary",
+      "cells": {
+        "halo-record": {
+          "default": "0/20",
+          "strong": "0/20"
+        },
+        "witnesskit": {
+          "default": "0/20",
+          "strong": "0/20"
+        },
+        "signet": {
+          "default": "0/20",
+          "strong": "0/20"
+        },
+        "agent-receipts": {
+          "default": "0/20",
+          "strong": "0/20"
+        },
+        "tool-e": {
+          "default": "0/20",
+          "strong": "0/20"
+        }
+      }
+    }
+  },
+  "controls": {
+    "C0": {
+      "name": "harness load and re-save, no change",
+      "cells": {
+        "halo-record": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "witnesskit": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "signet": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "agent-receipts": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "tool-e": {
+          "default": "0/5",
+          "strong": "0/5"
+        }
+      }
+    },
+    "C1": {
+      "name": "copy to a new directory",
+      "cells": {
+        "halo-record": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "witnesskit": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "signet": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "agent-receipts": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "tool-e": {
+          "default": "0/5",
+          "strong": "0/5"
+        }
+      }
+    },
+    "C2": {
+      "name": "CRLF line endings",
+      "cells": {
+        "halo-record": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "witnesskit": {
+          "default": "n/a",
+          "strong": "n/a"
+        },
+        "signet": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "agent-receipts": {
+          "default": "n/a",
+          "strong": "n/a"
+        },
+        "tool-e": {
+          "default": "n/a",
+          "strong": "n/a"
+        }
+      }
+    },
+    "C3": {
+      "name": "re-serialised JSON (key order, spacing)",
+      "cells": {
+        "halo-record": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "witnesskit": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "signet": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "agent-receipts": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "tool-e": {
+          "default": "0/5",
+          "strong": "0/5"
+        }
+      }
+    },
+    "C4": {
+      "name": "extra trailing newline",
+      "cells": {
+        "halo-record": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "witnesskit": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "signet": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "agent-receipts": {
+          "default": "0/5",
+          "strong": "0/5"
+        },
+        "tool-e": {
+          "default": "0/5",
+          "strong": "0/5"
+        }
+      }
+    }
+  },
+  "coverage": {
+    "halo-record": {
+      "default": {
+        "fields": 24,
+        "rate": "104/104",
+        "undetected_fields": []
+      },
+      "strong": {
+        "fields": 24,
+        "rate": "104/104",
+        "undetected_fields": []
+      }
+    },
+    "witnesskit": {
+      "default": {
+        "fields": 24,
+        "rate": "76/76",
+        "undetected_fields": []
+      },
+      "strong": {
+        "fields": 24,
+        "rate": "76/76",
+        "undetected_fields": []
+      }
+    },
+    "signet": {
+      "default": {
+        "fields": 29,
+        "rate": "101/101",
+        "undetected_fields": []
+      },
+      "strong": {
+        "fields": 29,
+        "rate": "101/101",
+        "undetected_fields": []
+      }
+    },
+    "agent-receipts": {
+      "default": {
+        "fields": 25,
+        "rate": "110/125",
+        "undetected_fields": [
+          "proof.created",
+          "proof.proofPurpose",
+          "proof.verificationMethod"
+        ]
+      },
+      "strong": {
+        "fields": 25,
+        "rate": "110/125",
+        "undetected_fields": [
+          "proof.created",
+          "proof.proofPurpose",
+          "proof.verificationMethod"
+        ]
+      }
+    },
+    "tool-e": {
+      "default": {
+        "fields": 21,
+        "rate": "70/105",
+        "undetected_fields": [
+          "agent_id",
+          "index",
+          "query_hash",
+          "response_hash",
+          "root_hash",
+          "timestamp",
+          "tool_name"
+        ]
+      },
+      "strong": {
+        "fields": 21,
+        "rate": "70/105",
+        "undetected_fields": [
+          "agent_id",
+          "index",
+          "query_hash",
+          "response_hash",
+          "root_hash",
+          "timestamp",
+          "tool_name"
+        ]
+      }
+    }
+  }
+}
