@@ -84,6 +84,33 @@ def test_every_attack_really_changes_the_log(tool, tmp_path):
 
 
 @pytest.mark.parametrize("tool", TOOLS)
+def test_runner_does_not_score_an_attack_that_changed_nothing(tool, tmp_path):
+    """Sprint fix: at some positions an attack can be a no-op for a tool (its
+    first record may have no integrity field to strip). Such a trial must be
+    recorded as not applicable, never as a miss."""
+    from reseal.runner import run_matrix
+
+    rows, _ = run_matrix(tools=[tool], seeds=(1,), n=N, setups=("default",),
+                         out_dir=tmp_path / "out", log=lambda *_: None)
+    a = adapters.get(tool)
+    run = a.record(generate(N, 1), tmp_path / "orig" / "log", strong=False)
+    original, _ = a.load(run.logdir)
+    for k, atk in enumerate(ATTACKS):
+        if not atk.positional or atk.id in ("A11", "A12", "A13", "A14"):
+            continue
+        for pos in ("first", "middle", "penultimate", "final"):
+            work = tmp_path / f"p{k}{pos}"
+            work.mkdir()
+            try:
+                presented, _ = atk.fn(Ctx(a, generate(N, 1), run, work, position=pos))
+            except NotApplicable:
+                continue
+            noop = a.load(presented)[0] == original
+            scored = [r for r in rows if r["id"] == atk.id and r["position"] == pos]
+            assert all(r["applicable"] is (not noop) for r in scored), (atk.id, pos)
+
+
+@pytest.mark.parametrize("tool", TOOLS)
 def test_attacks_do_not_touch_the_original_or_external_state(tool, tmp_path):
     a = adapters.get(tool)
     events = generate(N, 1)

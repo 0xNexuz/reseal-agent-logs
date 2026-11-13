@@ -29,6 +29,14 @@ def _version(adapter) -> str:
         return "unknown"
 
 
+def _unchanged(adapter, original, presented) -> bool:
+    """True if the tampered log holds exactly the records of the original."""
+    try:
+        return adapter.load(presented)[0] == adapter.load(original)[0]
+    except Exception:
+        return False
+
+
 def _safe_verify(adapter, logdir, external, strong) -> Verdict:
     try:
         return adapter.verify(logdir, external, strong=strong)
@@ -88,6 +96,11 @@ def run_matrix(tools=None, seeds=(0,), n=200, setups=("default", "strong"),
                             try:
                                 presented, ext = atk.fn(ctx)
                             except NotApplicable:
+                                add("attack", atk.id, atk.name, atk.tier, variant, pos, None, False)
+                                continue
+                            # sprint fix: an attack that leaves the log unchanged is not an
+                            # attack (e.g. stripping a proof from a record that has none)
+                            if _unchanged(adapter, run.logdir, presented):
                                 add("attack", atk.id, atk.name, atk.tier, variant, pos, None, False)
                                 continue
                             verdict = _safe_verify(adapter, presented, ext or run.external, strong)
