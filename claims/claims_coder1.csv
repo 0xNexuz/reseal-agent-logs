@@ -19,14 +19,14 @@ witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Truncate / roll back | only
 witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Backwards-dated entry | optional monotonic-timestamp check",backdate,any,claims_with_setup,monotonic-timestamp check,no,,
 witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"The signing key-holder can re-sign a rewritten chain.",rewrite,T2,disclaims,,no,,
 witnesskit,C1,README.md,0.1.0 PyPI 2026-11-13,"Tamper-evident, not tamper-proof",rewrite,T2,disclaims,,no,,same limit restated next to the quick start
-signet,C1,README.md,main 2026-11-11,"Modify any field — tool name, parameters, timestamp, signer — and the Ed25519 signature breaks.",edit,T1,claims,,yes,,
-signet,C1,README.md,main 2026-11-11,"Delete or reorder entries and the SHA-256 hash chain breaks.",delete,T1,claims,,yes,,no exception stated for the last entry
-signet,C1,README.md,main 2026-11-11,"Delete or reorder entries and the SHA-256 hash chain breaks.",reorder,T1,claims,,yes,,
-signet,C1,docs/SECURITY.md,main 2026-11-13,"The audit log has not been tampered with (hash chain intact)",edit,any,claims,,no,prove,listed under 'What Signet proves'; general slogan
-signet,C1,docs/SECURITY.md,main 2026-11-13,"Truncate log tail: Detectable if expected record count is known",truncate,any,claims_with_setup,an expected record count kept by the verifier,no,,
-signet,C1,docs/SECURITY.md,main 2026-11-13,"Modify and re-sign: Requires the private key; public key verification catches if different key used",forge,T1+,claims_with_setup,pinned public key,no,,
-signet,C1,docs/SECURITY.md,main 2026-11-13,"Modify and re-sign: Requires the private key",rewrite,T2,disclaims,,no,,implicit: the key holder can re-sign; coder's reading
-signet,C1,docs/SECURITY.md,main 2026-11-13,"Hash chain proves ordering and integrity, not completeness — a compromised agent could skip logging",capture,boundary,disclaims,,no,,
+signet,C1,README.md,commit f179591 2026-11-13,"Modify any field — tool name, parameters, timestamp, signer — and the Ed25519 signature breaks.",edit,T1,claims,,yes,,
+signet,C1,README.md,commit f179591 2026-11-13,"Delete or reorder entries and the SHA-256 hash chain breaks.",delete,T1,claims,,yes,,no exception stated for the last entry
+signet,C1,README.md,commit f179591 2026-11-13,"Delete or reorder entries and the SHA-256 hash chain breaks.",reorder,T1,claims,,yes,,
+signet,C1,docs/SECURITY.md,commit f179591 2026-11-13,"The audit log has not been tampered with (hash chain intact)",edit,any,claims,,no,prove,listed under 'What Signet proves'; general slogan
+signet,C1,docs/SECURITY.md,commit f179591 2026-11-13,"Truncate log tail: Detectable if expected record count is known",truncate,any,claims_with_setup,an expected record count kept by the verifier,no,,
+signet,C1,docs/SECURITY.md,commit f179591 2026-11-13,"Modify and re-sign: Requires the private key; public key verification catches if different key used",forge,T1+,claims_with_setup,pinned public key,no,,
+signet,C1,docs/SECURITY.md,commit f179591 2026-11-13,"Modify and re-sign: Requires the private key",rewrite,T2,disclaims,,no,,implicit: the key holder can re-sign; coder's reading
+signet,C1,docs/SECURITY.md,commit f179591 2026-11-13,"Hash chain proves ordering and integrity, not completeness — a compromised agent could skip logging",capture,boundary,disclaims,,no,,
 agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"cryptographically signed, hash-chained records that can't be quietly altered after the fact",edit,any,claims,,yes,can't,general slogan
 agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"with cryptographic proof the log hasn't been tampered with after the fact",edit,any,claims,,yes,proof,
 agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"The receipt chain shows exactly which actions it took, in what order",reorder,any,claims,,yes,,

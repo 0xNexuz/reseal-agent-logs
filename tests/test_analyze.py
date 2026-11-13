@@ -1,5 +1,7 @@
 """Checks on the claims-versus-behaviour labelling."""
 
+from pathlib import Path
+
 from reseal.analyze import claim_for, label, outcome
 
 
@@ -40,3 +42,10 @@ def test_labels():
     assert label("disclaims", "specific", "strong", "caught") == "better than stated"
     assert label("silent", "none", "default", "missed") == "silent miss"
     assert label("silent", "none", "default", "caught") == "caught (unstated)"
+
+
+def test_every_coded_quote_is_in_its_snapshot():
+    from reseal.quotecheck import check
+
+    root = Path(__file__).resolve().parent.parent
+    assert check(root / "claims" / "claims_coder1.csv") == []
