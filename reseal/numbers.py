@@ -85,7 +85,9 @@ def run_checks(rows, meta, add, name):
         f"{sum(len(v) > 1 for v in c.values())}; clean logs accepted "
         f"{sum(b['status'] == 'accepted' for b in meta['baselines'])}/{len(meta['baselines'])}; "
         f"benign controls flagged {sum(r['detected'] == 'True' for r in ctl)}/{len(ctl)}; "
-        f"control rows that do not apply: {sum(r['kind'] == 'control' and r['applicable'] != 'True' for r in rows)}")
+        f"control rows that do not apply: {sum(r['kind'] == 'control' and r['applicable'] != 'True' for r in rows)}; "
+        f"attack rows that do not apply (the attack changes nothing): "
+        f"{sum(r['kind'] != 'control' and r['applicable'] != 'True' for r in rows)}")
     return c
 
 
@@ -103,7 +105,8 @@ def numbers() -> str:
     add("## Run size and checks\n")
     c_main = run_checks(rows, meta, add, "Main run (default, strong; 1,000 events; seeds 0-4)")
     c_rob = run_checks(rob, rmeta, add, "Robustness run (default, strong; 100 events; seeds 5-9)")
-    run_checks(lay, lmeta, add, "Checkpoint run (checkpoint, checkpoint-stale, baseline default; 1,000 events; seeds 0-4)")
+    c_lay = run_checks(lay, lmeta, add, "Checkpoint run (checkpoint, checkpoint-stale, baseline default; 1,000 events; seeds 0-4)")
+    add(f"- Distinct cells, main plus checkpoint run: {len(c_main) + len(c_lay)}")
     shared = set(c_main) & set(c_rob)
     add(f"- Cells shared by the main and robustness runs: {len(shared)}; with a different outcome: "
         f"{sum(c_main[k] != c_rob[k] for k in shared)}\n")
@@ -183,7 +186,7 @@ def appendix_c(res, tables) -> str:
     row_of = {}
     for label, ids, pos in ROWS:
         for i in ids:
-            row_of.setdefault(i, []).append(label)
+            row_of.setdefault(i, []).append(label.replace("\n", " "))
     tier = {"T1": "outside editor", "T1+": "re-sealer (no keys)", "T2": "operator (real keys)",
             "T3": "forking operator", "boundary": "control"}
     for atk in ATTACKS[:8]:

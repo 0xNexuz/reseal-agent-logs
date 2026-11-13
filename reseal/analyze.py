@@ -16,11 +16,15 @@ from pathlib import Path
 from .report import load
 
 # property -> (attack ids, attacker tier, positions used or None for all)
+#
+# CODEBOOK is the mapping written before the sprint (claims/CODEBOOK.md): every
+# deletion is "delete", only A4 is "truncate". REGROUPED is a sensitivity
+# variant added in the sprint: deleting the last record is byte-for-byte a
+# truncation by one, so it is moved to "truncate". The report's main labels use
+# CODEBOOK; REGROUPED is reported next to it.
 INTERIOR = ("first", "middle", "penultimate")
-PROPERTIES = [
+_COMMON = [
     ("edit", ("A1", "A2"), "T1", None, "change a record"),
-    ("delete", ("A3",), "T1", INTERIOR, "remove a record that is not the last"),
-    ("truncate", ("A4", "A3"), "T1", ("-", "final"), "drop records from the end"),
     ("reorder", ("A5",), "T1", None, "swap two records"),
     ("insert", ("A6", "A7"), "T1", None, "add a forged or duplicate record"),
     ("backdate", ("A8",), "T1", None, "change a record's time"),
@@ -30,6 +34,15 @@ PROPERTIES = [
     ("fork", ("A13",), "T3", None, "operator shows a different history"),
     ("capture", ("A14",), "boundary", None, "action never reached the recorder"),
 ]
+CODEBOOK = _COMMON[:1] + [
+    ("delete", ("A3",), "T1", None, "remove one record (any position)"),
+    ("truncate", ("A4",), "T1", None, "cut records off the end"),
+] + _COMMON[1:]
+REGROUPED = _COMMON[:1] + [
+    ("delete", ("A3",), "T1", INTERIOR, "remove a record that is not the last"),
+    ("truncate", ("A4", "A3"), "T1", ("-", "final"), "drop records from the end"),
+] + _COMMON[1:]
+PROPERTIES = CODEBOOK
 
 # Does ReSeal's strong setup switch on the setup a "claims_with_setup" row names?
 # Signet's docs name an expected record count for truncation; its verifier has no
@@ -135,7 +148,7 @@ def strict_violations(rows, claims, tools, setups):
     return out
 
 
-def build(out_dir, claims_path):
+def build(out_dir, claims_path, properties=None):
     rows, meta = load(out_dir)
     claims = load_claims(claims_path)
     tools = list(meta["tools"])
@@ -145,14 +158,14 @@ def build(out_dir, claims_path):
             by[(r["tool"], r["setup"], r["id"])].append(r)
     table = []
     for tool in tools:
-        for prop, ids, tier, positions, desc in PROPERTIES:
+        for prop, ids, tier, positions, desc in (properties or PROPERTIES):
             strength, kind, crow = claim_for(claims, public(tool), prop, tier)
             for setup in meta["setups"]:
                 rs = []
                 for i in ids:
                     for r in by[(tool, setup, i)]:
                         if positions is None or r["position"] in positions:
-                            # A3 only counts toward truncate at the final position
+                            # regrouped variant: A3 counts toward truncate only at the final position
                             if prop == "truncate" and i == "A3" and r["position"] != "final":
                                 continue
                             rs.append(r)
@@ -301,7 +314,7 @@ def main(argv=None):
     p = Path(a.out) / "CLAIMS_CARDS.md"
     p.write_text(cards(table, meta, load_claims(a.claims)), encoding="utf-8")
     print("wrote", p)
-    print("wrote", figure(rows, meta, Path(a.out) / "fig_detection.png"))
+    # the report's figure is drawn by reseal.figure (it also needs the checkpoint run)
     counts = defaultdict(int)
     for r in table:
         counts[(r["setup"], r["label"])] += 1

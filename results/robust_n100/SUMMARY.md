@@ -26,7 +26,7 @@ Each cell is **detected / trials**. Detected means the tool's own verifier did n
 | A6 | insert a forged record | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
 | A7 | replay a duplicate record | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
 | A8 | backdate a timestamp | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
-| A10 | strip integrity fields (downgrade) | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 15/20 |
+| A10 | strip integrity fields (downgrade) | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 15/15 |
 | A11 | rebuild without the original keys | T1+ | 0/40 | 40/40 | 0/40 | 40/40 | 0/40 |
 | A12 | operator rewrite with real keys | T2 | 0/40 | 0/40 | 0/40 | 0/40 | 0/40 |
 | A13 | fork: same prefix, different suffix | T3 | 0/20 | 0/20 | 0/20 | 0/20 | 0/20 |
@@ -54,7 +54,7 @@ Each cell is **detected / trials**. Detected means the tool's own verifier did n
 | A6 | insert a forged record | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
 | A7 | replay a duplicate record | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
 | A8 | backdate a timestamp | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 0/20 |
-| A10 | strip integrity fields (downgrade) | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 15/20 |
+| A10 | strip integrity fields (downgrade) | T1 | 20/20 | 20/20 | 20/20 | 20/20 | 15/15 |
 | A11 | rebuild without the original keys | T1+ | 40/40 | 40/40 | 40/40 | 40/40 | 0/40 |
 | A12 | operator rewrite with real keys | T2 | 40/40 | 40/40 | 0/40 | 40/40 | 0/40 |
 | A13 | fork: same prefix, different suffix | T3 | 20/20 | 20/20 | 0/20 | 20/20 | 0/20 |

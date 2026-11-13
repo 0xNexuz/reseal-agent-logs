@@ -11,8 +11,8 @@ One card per tool. Each row compares what the tool's documentation says with wha
 | Tampering | Attacker | Docs say | Default | Strong | Verdict (default / strong) |
 | --- | --- | --- | --- | --- | --- |
 | change a record | T1 | detects it | 40/40 | 40/40 | holds / holds |
-| remove a record that is not the last | T1 | detects it with a head held by someone else | 15/15 | 15/15 | holds without the setup / holds with setup |
-| drop records from the end | T1 | detects it with external witness checkpoints | 0/15 | 15/15 | needs setup (disclosed) / holds with setup |
+| remove one record (any position) | T1 | detects it with a head held by someone else | 15/20 | 20/20 | needs setup (disclosed) / holds with setup |
+| cut records off the end | T1 | detects it with external witness checkpoints | 0/10 | 10/10 | needs setup (disclosed) / holds with setup |
 | swap two records | T1 | detects it | 20/20 | 20/20 | holds / holds |
 | add a forged or duplicate record | T1 | nothing | 40/40 | 40/40 | caught (unstated) / caught (unstated) |
 | change a record's time | T1 | nothing | 20/20 | 20/20 | caught (unstated) / caught (unstated) |
@@ -41,8 +41,8 @@ Statements coded:
 | Tampering | Attacker | Docs say | Default | Strong | Verdict (default / strong) |
 | --- | --- | --- | --- | --- | --- |
 | change a record | T1 | detects it | 40/40 | 40/40 | holds / holds |
-| remove a record that is not the last | T1 | detects it | 15/15 | 15/15 | holds / holds |
-| drop records from the end | T1 | detects it with expected_head | 0/15 | 15/15 | needs setup (disclosed) / holds with setup |
+| remove one record (any position) | T1 | detects it | 15/20 | 20/20 | claim not met / holds |
+| cut records off the end | T1 | detects it with expected_head | 0/10 | 10/10 | needs setup (disclosed) / holds with setup |
 | swap two records | T1 | detects it | 20/20 | 20/20 | holds / holds |
 | add a forged or duplicate record | T1 | detects it | 40/40 | 40/40 | holds / holds |
 | change a record's time | T1 | detects it with monotonic-timestamp check | 20/20 | 20/20 | holds without the setup / holds with setup |
@@ -73,8 +73,8 @@ Statements coded:
 | Tampering | Attacker | Docs say | Default | Strong | Verdict (default / strong) |
 | --- | --- | --- | --- | --- | --- |
 | change a record | T1 | detects it | 40/40 | 40/40 | holds / holds |
-| remove a record that is not the last | T1 | detects it | 15/15 | 15/15 | holds / holds |
-| drop records from the end | T1 | detects it with an expected record count kept by the verifier | 0/15 | 0/15 | needs setup (disclosed) / setup left to the user (disclosed) |
+| remove one record (any position) | T1 | detects it | 15/20 | 15/20 | claim not met / claim not met |
+| cut records off the end | T1 | detects it with an expected record count kept by the verifier | 0/10 | 0/10 | needs setup (disclosed) / setup left to the user (disclosed) |
 | swap two records | T1 | detects it | 20/20 | 20/20 | holds / holds |
 | add a forged or duplicate record | T1 | nothing | 40/40 | 40/40 | caught (unstated) / caught (unstated) |
 | change a record's time | T1 | nothing | 20/20 | 20/20 | caught (unstated) / caught (unstated) |
@@ -102,8 +102,8 @@ Statements coded:
 | Tampering | Attacker | Docs say | Default | Strong | Verdict (default / strong) |
 | --- | --- | --- | --- | --- | --- |
 | change a record | T1 | detects it | 40/40 | 40/40 | holds / holds |
-| remove a record that is not the last | T1 | detects it | 15/15 | 15/15 | holds / holds |
-| drop records from the end | T1 | nothing | 0/15 | 15/15 | silent miss / caught (unstated) |
+| remove one record (any position) | T1 | detects it | 15/20 | 20/20 | claim not met / holds |
+| cut records off the end | T1 | nothing | 0/10 | 10/10 | silent miss / caught (unstated) |
 | swap two records | T1 | detects it | 20/20 | 20/20 | holds / holds |
 | add a forged or duplicate record | T1 | nothing | 40/40 | 40/40 | caught (unstated) / caught (unstated) |
 | change a record's time | T1 | nothing | 20/20 | 20/20 | caught (unstated) / caught (unstated) |
@@ -127,12 +127,12 @@ Statements coded:
 | Tampering | Attacker | Docs say | Default | Strong | Verdict (default / strong) |
 | --- | --- | --- | --- | --- | --- |
 | change a record | T1 | detects it | 0/40 | 0/40 | claim not met / claim not met |
-| remove a record that is not the last | T1 | nothing | 0/15 | 0/15 | silent miss / silent miss |
-| drop records from the end | T1 | nothing | 0/15 | 0/15 | silent miss / silent miss |
+| remove one record (any position) | T1 | nothing | 0/20 | 0/20 | silent miss / silent miss |
+| cut records off the end | T1 | nothing | 0/10 | 0/10 | silent miss / silent miss |
 | swap two records | T1 | nothing | 0/20 | 0/20 | silent miss / silent miss |
 | add a forged or duplicate record | T1 | nothing | 0/40 | 0/40 | silent miss / silent miss |
 | change a record's time | T1 | nothing | 0/20 | 0/20 | silent miss / silent miss |
-| strip signature or integrity fields | T1 | nothing | 15/20 | 15/20 | silent miss / silent miss |
+| strip signature or integrity fields | T1 | nothing | 15/15 | 15/15 | caught (unstated) / caught (unstated) |
 | rebuild the log without the original keys | T1+ | detects it | 0/40 | 0/40 | claim not met / claim not met |
 | operator rebuilds the log with the real keys | T2 | nothing | 0/40 | 0/40 | silent miss / silent miss |
 | operator shows a different history | T3 | nothing | 0/20 | 0/20 | silent miss / silent miss |

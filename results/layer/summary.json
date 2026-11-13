@@ -1,0 +1,768 @@
+{
+  "attacks": {
+    "A1": {
+      "name": "edit a tool argument",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A2": {
+      "name": "flip a policy verdict",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A3": {
+      "name": "delete one record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "15/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "15/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "15/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "15/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A4": {
+      "name": "truncate the tail",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "10/10",
+          "checkpoint-stale": "0/10",
+          "default": "0/10"
+        }
+      }
+    },
+    "A5": {
+      "name": "swap two adjacent records",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A6": {
+      "name": "insert a forged record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "15/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "15/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A7": {
+      "name": "replay a duplicate record",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "15/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "15/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A8": {
+      "name": "backdate a timestamp",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A10": {
+      "name": "strip integrity fields (downgrade)",
+      "tier": "T1",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "15/15",
+          "checkpoint-stale": "15/15",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "n/a",
+          "checkpoint-stale": "n/a",
+          "default": "n/a"
+        }
+      }
+    },
+    "A11": {
+      "name": "rebuild without the original keys",
+      "tier": "T1+",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "20/40",
+          "default": "0/40"
+        }
+      }
+    },
+    "A12": {
+      "name": "operator rewrite with real keys",
+      "tier": "T2",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "20/40",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "40/40",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "40/40",
+          "checkpoint-stale": "20/40",
+          "default": "0/40"
+        }
+      }
+    },
+    "A13": {
+      "name": "fork: same prefix, different suffix",
+      "tier": "T3",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "20/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "20/20",
+          "checkpoint-stale": "10/20",
+          "default": "0/20"
+        }
+      }
+    },
+    "A14": {
+      "name": "capture omission (boundary control)",
+      "tier": "boundary",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/20",
+          "checkpoint-stale": "0/20",
+          "default": "0/20"
+        }
+      }
+    }
+  },
+  "controls": {
+    "C0": {
+      "name": "harness load and re-save, no change",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "0/5"
+        }
+      }
+    },
+    "C1": {
+      "name": "copy to a new directory",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "0/5"
+        }
+      }
+    },
+    "C2": {
+      "name": "CRLF line endings",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "n/a",
+          "checkpoint-stale": "n/a",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "n/a",
+          "checkpoint-stale": "n/a",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "n/a",
+          "checkpoint-stale": "n/a",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "0/5"
+        }
+      }
+    },
+    "C3": {
+      "name": "re-serialised JSON (key order, spacing)",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "0/5"
+        }
+      }
+    },
+    "C4": {
+      "name": "extra trailing newline",
+      "cells": {
+        "halo-record": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "witnesskit": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "signet": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "agent-receipts": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "tool-e": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "n/a"
+        },
+        "plain-jsonl": {
+          "checkpoint": "0/5",
+          "checkpoint-stale": "0/5",
+          "default": "0/5"
+        }
+      }
+    }
+  },
+  "coverage": {
+    "halo-record": {
+      "checkpoint": {
+        "fields": 20,
+        "rate": "100/100",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 20,
+        "rate": "100/100",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 0,
+        "rate": "n/a",
+        "undetected_fields": []
+      }
+    },
+    "witnesskit": {
+      "checkpoint": {
+        "fields": 20,
+        "rate": "73/73",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 20,
+        "rate": "73/73",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 0,
+        "rate": "n/a",
+        "undetected_fields": []
+      }
+    },
+    "signet": {
+      "checkpoint": {
+        "fields": 25,
+        "rate": "98/98",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 25,
+        "rate": "98/98",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 0,
+        "rate": "n/a",
+        "undetected_fields": []
+      }
+    },
+    "agent-receipts": {
+      "checkpoint": {
+        "fields": 25,
+        "rate": "125/125",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 25,
+        "rate": "125/125",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 0,
+        "rate": "n/a",
+        "undetected_fields": []
+      }
+    },
+    "tool-e": {
+      "checkpoint": {
+        "fields": 27,
+        "rate": "135/135",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 27,
+        "rate": "135/135",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 0,
+        "rate": "n/a",
+        "undetected_fields": []
+      }
+    },
+    "plain-jsonl": {
+      "checkpoint": {
+        "fields": 14,
+        "rate": "43/43",
+        "undetected_fields": []
+      },
+      "checkpoint-stale": {
+        "fields": 14,
+        "rate": "43/43",
+        "undetected_fields": []
+      },
+      "default": {
+        "fields": 14,
+        "rate": "0/43",
+        "undetected_fields": [
+          "actor",
+          "args.approver",
+          "args.bytes",
+          "args.path",
+          "args.query",
+          "args.request",
+          "args.scope",
+          "args.to_agent",
+          "i",
+          "kind",
+          "outcome",
+          "tool",
+          "ts",
+          "verdict"
+        ]
+      }
+    }
+  }
+}

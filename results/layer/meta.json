@@ -1,0 +1,645 @@
+{
+  "n_events": 1000,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "setups": [
+    "checkpoint",
+    "checkpoint-stale",
+    "default"
+  ],
+  "positions": [
+    "first",
+    "middle",
+    "penultimate",
+    "final"
+  ],
+  "tools": {
+    "halo-record": {
+      "version": "0.2.47",
+      "default_setup": "verify_log() on the JSONL chain (what `halo verify` runs)",
+      "strong_setup": "verify_log() plus verify_completeness() against a witness checkpoint held outside the operator, with the expected subject pinned"
+    },
+    "witnesskit": {
+      "version": "0.1.0",
+      "default_setup": "verify_chain(pack, trusted_keys=[pub]) - the issuer key is pinned, as the README requires",
+      "strong_setup": "default plus expected_head (a head hash held outside the operator)"
+    },
+    "signet": {
+      "version": "0.11.0",
+      "default_setup": "audit_verify_chain(dir) and audit_verify_signatures(dir), no pinned keys (what `signet verify --chain` / `signet audit --verify` run)",
+      "strong_setup": "default plus trusted_agent_keys=[agent public key] held outside the operator"
+    },
+    "agent-receipts": {
+      "version": "0.16.0",
+      "default_setup": "verify_chain(receipts, public_key) - the issuer key is a required argument",
+      "strong_setup": "default plus expected_length and expected_final_hash held outside the operator"
+    },
+    "tool-e": {
+      "version": "",
+      "default_setup": "the SDK's own check on every receipt",
+      "strong_setup": "same as default - no stronger offline check is documented"
+    },
+    "plain-jsonl": {
+      "version": "",
+      "default_setup": "none: the log is accepted if every line parses as JSON",
+      "strong_setup": "same as default"
+    }
+  },
+  "setup_notes": {
+    "checkpoint": "the tool's default check plus a ReSeal checkpoint (count and prefix digest) taken after the last record and held outside the operator",
+    "checkpoint-stale": "the tool's default check plus a ReSeal checkpoint (count and prefix digest) taken after the first 90% of the log and held outside the operator"
+  },
+  "baselines": [
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "halo-record",
+      "version": "0.2.47",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "witnesskit",
+      "version": "0.1.0",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "signet",
+      "version": "0.11.0",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "agent-receipts",
+      "version": "0.16.0",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "default",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 lines parse"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "default",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 lines parse"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "default",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 lines parse"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "default",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 lines parse"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "default",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "1000 lines parse"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 1000 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "plain-jsonl",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": "checkpoint: first 900 records match the checkpoint"
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 0,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 1,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 2,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 3,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    },
+    {
+      "tool": "tool-e",
+      "version": "",
+      "setup": "checkpoint-stale",
+      "seed": 4,
+      "n": 1000,
+      "status": "accepted",
+      "detail": ""
+    }
+  ],
+  "trials": 5286
+}

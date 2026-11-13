@@ -1,17 +1,17 @@
 {
-  "default|caught (unstated)": 11,
-  "default|claim not met": 2,
+  "default|caught (unstated)": 12,
+  "default|claim not met": 5,
   "default|disclosed limit": 7,
-  "default|holds": 13,
-  "default|holds without the setup": 2,
-  "default|needs setup (disclosed)": 5,
-  "default|silent miss": 15,
+  "default|holds": 10,
+  "default|holds without the setup": 1,
+  "default|needs setup (disclosed)": 6,
+  "default|silent miss": 14,
   "strong|better than stated": 4,
-  "strong|caught (unstated)": 14,
-  "strong|claim not met": 2,
+  "strong|caught (unstated)": 15,
+  "strong|claim not met": 3,
   "strong|disclosed limit": 3,
-  "strong|holds": 13,
+  "strong|holds": 12,
   "strong|holds with setup": 6,
   "strong|setup left to the user (disclosed)": 1,
-  "strong|silent miss": 12
+  "strong|silent miss": 11
 }
