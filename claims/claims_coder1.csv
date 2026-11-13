@@ -1,0 +1,37 @@
+tool,coder,source,source_version,quote,property,tier,strength,setup_needed,headline,absolute_word,notes
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"Tamper-evident audit trails for AI agents — hash-chained Runtime Records",edit,any,claims,,yes,,general slogan
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"a chain you hold yourself proves records were not edited, relative to a head someone already holds",edit,T1,claims,,yes,prove,claims table: detect edits to an established artifact
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"given a chain head someone already holds, any edit, reordering, or deletion in the records behind it becomes detectable",reorder,T1,claims,,no,,
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"given a chain head someone already holds, any edit, reordering, or deletion in the records behind it becomes detectable",delete,T1,claims_with_setup,a head held by someone else,no,,interior deletion; conditioned on an established head
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"only checkpoints held outside the operator prove none were removed",truncate,any,claims_with_setup,external witness checkpoints,yes,prove,
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"a chain proves internal consistency, not history",forge,T1+,disclaims,,no,,unsigned chain: anyone can re-seal
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"an operator could drop a record and re-seal, and the new file would verify",rewrite,T2,disclaims,,no,,self-held chain
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"Checkpoints make rewriting committed history detectable",rewrite,T2,claims_with_setup,external witness checkpoints,no,,
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"Checkpoints make rewriting committed history detectable",fork,T3,claims_with_setup,external witness checkpoints,no,,a fork is a rewrite of committed history; coder's reading
+halo-record,C1,README.md,0.2.47 PyPI 2026-11-13,"neither the chain nor the witness proves that every real-world action passed through the recorder",capture,boundary,disclaims,,no,,
+witnesskit,C1,README.md,0.1.0 PyPI 2026-11-13,"Every action becomes a signed, hash-chained log entry; any later tamper is detected and located.",edit,any,claims,,yes,,general slogan; 'any later tamper'
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Alter an entry's content | hash recomputation",edit,T1,claims,,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Delete an entry | sequence-number gap + broken prev_hash link",delete,T1,claims,,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Insert a fake entry | downstream seq/link mismatch; a forged entry fails signature/issuer",insert,T1,claims,,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Reorder entries | sequence-number mismatch",reorder,T1,claims,,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Forge a whole trail | issuer pinning (signer not in trusted_keys)",forge,T1+,claims,,no,,issuer pinning is required by default (fail closed)
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Truncate / roll back | only with a known expected_head",truncate,any,claims_with_setup,expected_head,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"Backwards-dated entry | optional monotonic-timestamp check",backdate,any,claims_with_setup,monotonic-timestamp check,no,,
+witnesskit,C1,SECURITY.md,commit 25dde68 2026-11-13,"The signing key-holder can re-sign a rewritten chain.",rewrite,T2,disclaims,,no,,
+witnesskit,C1,README.md,0.1.0 PyPI 2026-11-13,"Tamper-evident, not tamper-proof",rewrite,T2,disclaims,,no,,same limit restated next to the quick start
+signet,C1,README.md,main 2026-11-11,"Modify any field — tool name, parameters, timestamp, signer — and the Ed25519 signature breaks.",edit,T1,claims,,yes,,
+signet,C1,README.md,main 2026-11-11,"Delete or reorder entries and the SHA-256 hash chain breaks.",delete,T1,claims,,yes,,no exception stated for the last entry
+signet,C1,README.md,main 2026-11-11,"Delete or reorder entries and the SHA-256 hash chain breaks.",reorder,T1,claims,,yes,,
+signet,C1,docs/SECURITY.md,main 2026-11-13,"The audit log has not been tampered with (hash chain intact)",edit,any,claims,,no,prove,listed under 'What Signet proves'; general slogan
+signet,C1,docs/SECURITY.md,main 2026-11-13,"Truncate log tail: Detectable if expected record count is known",truncate,any,claims_with_setup,an expected record count kept by the verifier,no,,
+signet,C1,docs/SECURITY.md,main 2026-11-13,"Modify and re-sign: Requires the private key; public key verification catches if different key used",forge,T1+,claims_with_setup,pinned public key,no,,
+signet,C1,docs/SECURITY.md,main 2026-11-13,"Modify and re-sign: Requires the private key",rewrite,T2,disclaims,,no,,implicit: the key holder can re-sign; coder's reading
+signet,C1,docs/SECURITY.md,main 2026-11-13,"Hash chain proves ordering and integrity, not completeness — a compromised agent could skip logging",capture,boundary,disclaims,,no,,
+agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"cryptographically signed, hash-chained records that can't be quietly altered after the fact",edit,any,claims,,yes,can't,general slogan
+agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"with cryptographic proof the log hasn't been tampered with after the fact",edit,any,claims,,yes,proof,
+agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"The receipt chain shows exactly which actions it took, in what order",reorder,any,claims,,yes,,
+agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"The receipt chain shows exactly which actions it took, in what order",delete,any,claims,,yes,,implied by 'exactly which actions'; coder's reading; uncertain
+agent-receipts,C1,README.md,obsigna 0.16.0 PyPI 2026-11-13,"Anyone with code execution in the agent can forge receipts.",rewrite,T2,disclaims,,no,,said of the in-process key pattern; marked not for production
+tool-e,C1,README.md,pinned PyPI version 2026-11-13,[paraphrase: each call gets a proof that cannot be forged or altered afterwards],edit,any,claims,,yes,can't,quote withheld to keep the tool unnamed
+tool-e,C1,README.md,pinned PyPI version 2026-11-13,[paraphrase: each call gets a proof that cannot be forged or altered afterwards],forge,any,claims,,yes,can't,quote withheld to keep the tool unnamed
+tool-e,C1,README.md,pinned PyPI version 2026-11-13,[paraphrase: tamper-evident audit trails],edit,any,claims,,yes,,general slogan
