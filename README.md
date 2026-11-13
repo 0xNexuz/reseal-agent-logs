@@ -22,17 +22,23 @@ Four of five tools refuse every edited, reordered, inserted or backdated
 record. In the default setup all five accept a truncated log, a log rebuilt by
 the operator with the real keys, and a forked history. Three tools refuse all
 of these once a head hash, record count or checkpoint is held outside the
-operator. One tool accepts altered records; it is reported unnamed.
+operator. One tool accepts altered records; it is reported unnamed. With a
+small outside checkpoint (`reseal/checkpoint.py`: a record count and a prefix
+digest) every tool, and an unprotected plain log, refuses every tampering that
+falls before the checkpoint.
 
 | File | What it holds |
 | --- | --- |
 | `report/ReSeal_report.pdf` | the report |
-| `results/main/SUMMARY.md` | detection tables for the main run (4,212 trials) |
-| `results/main/CLAIMS_CARDS.md` | one card per tool: documentation versus verifier |
-| `results/main/REPORT_NUMBERS.md` | every number quoted in the report, recomputed |
-| `results/main/trials.csv` | every single trial |
+| `results/fig_main.png` | the main figure |
+| `results/REPORT_NUMBERS.md` | every number quoted in the report, recomputed |
+| `results/main/` | main run: default and strong setups, 4,212 trials |
+| `results/layer/` | checkpoint run: every tool plus the plain-log baseline |
 | `results/robust_n100/` | robustness run: 100-event logs, five other seeds |
-| `claims/` | codebook, coded claims, saved documentation snapshots |
+| `results/main/CLAIMS_CARDS.md` | one card per tool: documentation versus verifier |
+| `claims/` | codebook, two independent codings, agreement, saved documentation |
+| `docs/OTEL_MAPPING.md` | sketch: the checkpoint on OpenTelemetry GenAI telemetry (untested) |
+| `results/TOOL_E_COMMITMENT.md` | digest of the withheld adapter |
 
 ## What it does
 
@@ -97,12 +103,22 @@ python -m reseal run --n 1000 --seeds 0 1 2 3 4 --out results/main
 `results/main/SUMMARY.md` holds the tables, `trials.csv` every single trial.
 The main run takes tens of minutes; `--n 100` finishes in about two.
 
-Then the analysis (needs `pip install matplotlib`):
+The checkpoint run and the analysis (needs `pip install matplotlib`):
 
 ```
-python -m reseal.analyze --out results/main     # labels, Claims Cards, figure
-python -m reseal.numbers                        # every number in the report
-python -m reseal.quotecheck                     # coded quotes versus snapshots
+for t in halo-record witnesskit signet agent-receipts; do
+  python -m reseal run --tools $t --n 1000 --seeds 0 1 2 3 4 \
+      --setups checkpoint checkpoint-stale --out results/layer_parts/$t
+done
+python -m reseal run --tools plain-jsonl --n 1000 --seeds 0 1 2 3 4 \
+    --setups default checkpoint checkpoint-stale --out results/layer_parts/plain-jsonl
+python -m reseal.merge results/layer_parts/* --out results/layer
+
+python -m reseal.analyze --out results/main     # labels, Claims Cards, strict reading
+python -m reseal.figure                         # results/fig_main.png
+python -m reseal.numbers                        # every number in the report, Appendix C
+python -m reseal.quotecheck claims/claims_coder1.csv claims/claims_coder2.csv
+python -m reseal.agreement claims/claims_coder1.csv claims/claims_coder2.csv
 python report/build.py                          # the PDF (needs markdown, playwright, pypdf)
 ```
 
@@ -113,7 +129,7 @@ records, which looks like a defect and not a documented limit, and its
 maintainer has not been told yet. Until that happens its adapter and its
 documentation snapshot are kept out of this repository, and its rows in
 `trials.csv` carry no name, no version and no verifier messages. A fresh clone
-therefore runs the four named tools, and 38 harness tests instead of 45. The
+therefore runs the four named tools and the baseline, and @@PUBTESTS@@ harness tests instead of @@ALLTESTS@@. The
 adapter loads from `private/tool_e.py` when that file is present.
 
 ## Reading a result

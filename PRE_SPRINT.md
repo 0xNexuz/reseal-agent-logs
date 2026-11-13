@@ -30,7 +30,7 @@ Code written (all files in this commit are pre-existing):
 
 Runs made:
 
-- A smoke run (100 events, 1 seed) and a timing run (1,000 events, 1 seed) to
+- Two pilot runs: a smoke run (100 events, 1 seed) and a timing run (1,000 events, 1 seed) to
   confirm the harness works end to end. Their numbers are **pilot output, not
   results**: they will not be reported. The reported experiment is re-run from
   scratch during the sprint with the full design.
@@ -66,24 +66,31 @@ Not done before the sprint:
 13 November:
 
 - Documentation snapshots saved for each tool (`claims/snapshots/`).
-- Claims coded from those snapshots (`claims/claims_coder1.csv`).
-- The reported experiment, run from scratch: `results/main/` (1,000 events,
-  seeds 0 to 4) and a robustness run, `results/robust_n100/` (100 events,
-  seeds 5 to 9).
-- New code: `reseal/analyze.py` (labels, Claims Cards, figure),
+- Claims coded twice from those snapshots: `claims/claims_coder1.csv` (the
+  AI assistant that built the harness) and `claims/claims_coder2.csv` (a
+  separate instance given only the codebook and the snapshots).
+- The reported runs, all from scratch: `results/main/` (1,000 events, seeds 0
+  to 4), `results/robust_n100/` (100 events, seeds 5 to 9) and
+  `results/layer/` (checkpoint setups and the plain-log baseline).
+- New code: `reseal/checkpoint.py` (the outside checkpoint),
+  `reseal/adapters/plain.py` (unprotected baseline), `reseal/analyze.py`
+  (labels, Claims Cards, strict reading), `reseal/figure.py`,
   `reseal/numbers.py` (recomputes every number in the report),
-  `reseal/quotecheck.py` (checks coded quotes against the snapshots),
-  `tests/test_analyze.py`, `report/build.py`.
-- The report: `report/ReSeal_report.md` and `.pdf`.
+  `reseal/quotecheck.py`, `reseal/agreement.py`, `reseal/merge.py`,
+  `tests/test_analyze.py`, `tests/test_checkpoint.py`, `report/build.py`.
+- The report: `report/ReSeal_report.md` and `.pdf`. A draft was put through
+  a mock review by fresh AI reviewers and revised.
 - The fifth tool was moved out of the repository and renamed Tool E in all
   files. The two earlier commits were rewritten for that purpose only: the
   adapter file became a stub and the tool's name was replaced. Their dates
-  and messages are the original ones.
+  and messages are the original ones. Later commits were made in batches, so
+  their times show when work was saved, not when it was done.
 
 Changes to pre-sprint code during the sprint, all small:
 
-- `reseal/adapters/__init__.py`: the fifth adapter is loaded only when present.
+- `reseal/adapters/__init__.py`: the fifth adapter is loaded only when
+  present; the plain-log baseline is registered.
 - `reseal/runner.py`: no version or verifier messages are written for a
-  withheld tool.
+  withheld tool; the two checkpoint setups wrap the tool's default verifier.
 - No attack, control, workload or named-tool adapter was changed after the
   pilot.

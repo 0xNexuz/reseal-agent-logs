@@ -45,6 +45,9 @@ em { font-style: italic; }
 
 def html() -> str:
     text = SRC.read_text(encoding="utf-8")
+    # Appendix C is generated from the results (python -m reseal.numbers)
+    cards = (HERE.parent / "results" / "APPENDIX_C.md").read_text(encoding="utf-8")
+    text = text.replace("<!-- CLAIMS_CARDS -->", cards)
 
     def inline_image(m):
         path = (HERE / m.group(2)).resolve()
