@@ -10,9 +10,29 @@ tampering it catches, in its default setup and in its strongest documented one.
 Built for the Apart Research **AI x Epistemics Research Sprint** (13-15 Nov
 2026), Track 2: Trust Infrastructure.
 
-> **Status: pre-sprint scaffold.** See [PRE_SPRINT.md](PRE_SPRINT.md) for
-> exactly what existed before the sprint started. Sprint work is everything
-> committed from 13 Nov 2026 onward.
+> **Status: sprint entry.** The report is in [`report/`](report/) and the
+> results in [`results/main/`](results/main/). The harness was built before
+> the sprint and is marked as pre-existing: [PRE_SPRINT.md](PRE_SPRINT.md)
+> lists exactly what existed before 13 Nov 2026 and what was added in the
+> sprint.
+
+## Results in one paragraph
+
+Four of five tools refuse every edited, reordered, inserted or backdated
+record. In the default setup all five accept a truncated log, a log rebuilt by
+the operator with the real keys, and a forked history. Three tools refuse all
+of these once a head hash, record count or checkpoint is held outside the
+operator. One tool accepts altered records; it is reported unnamed.
+
+| File | What it holds |
+| --- | --- |
+| `report/ReSeal_report.pdf` | the report |
+| `results/main/SUMMARY.md` | detection tables for the main run (4,212 trials) |
+| `results/main/CLAIMS_CARDS.md` | one card per tool: documentation versus verifier |
+| `results/main/REPORT_NUMBERS.md` | every number quoted in the report, recomputed |
+| `results/main/trials.csv` | every single trial |
+| `results/robust_n100/` | robustness run: 100-event logs, five other seeds |
+| `claims/` | codebook, coded claims, saved documentation snapshots |
 
 ## What it does
 
@@ -54,7 +74,7 @@ never recorded. It marks the line between integrity and completeness.
 | WitnessKit | `witnesskit` | signed hash chain; optional expected head |
 | Signet | `signet-auth` | signed receipts; hash-chained audit log |
 | Agent Receipts | `obsigna` | signed receipt chain; optional expected length and final hash |
-| Tool E | withheld | a fifth tool, unnamed for now |
+| Tool E | withheld | a fifth tool, unnamed for now (see "The unnamed tool") |
 
 Versions are pinned in `requirements.lock`.
 
@@ -75,6 +95,26 @@ python -m reseal run --n 1000 --seeds 0 1 2 3 4 --out results/main
 ```
 
 `results/main/SUMMARY.md` holds the tables, `trials.csv` every single trial.
+The main run takes tens of minutes; `--n 100` finishes in about two.
+
+Then the analysis (needs `pip install matplotlib`):
+
+```
+python -m reseal.analyze --out results/main     # labels, Claims Cards, figure
+python -m reseal.numbers                        # every number in the report
+python -m reseal.quotecheck                     # coded quotes versus snapshots
+python report/build.py                          # the PDF (needs markdown, playwright, pypdf)
+```
+
+## The unnamed tool
+
+A fifth tool appears in the results as `tool-e`. Its verifier accepted altered
+records, which looks like a defect and not a documented limit, and its
+maintainer has not been told yet. Until that happens its adapter and its
+documentation snapshot are kept out of this repository, and its rows in
+`trials.csv` carry no name, no version and no verifier messages. A fresh clone
+therefore runs the four named tools, and 38 harness tests instead of 45. The
+adapter loads from `private/tool_e.py` when that file is present.
 
 ## Reading a result
 

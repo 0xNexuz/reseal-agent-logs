@@ -19,7 +19,8 @@ Code written (all files in this commit are pre-existing):
 
 - `reseal/workload.py` - seeded synthetic agent workload.
 - `reseal/adapters/` - adapter contract and adapters for halo-record,
-  WitnessKit, Signet, Agent Receipts (obsigna) and Tool E.
+  WitnessKit, Signet, Agent Receipts (obsigna) and a fifth tool, reported
+  as Tool E and kept out of this repository (see README).
 - `reseal/attacks.py` - attacks A1-A14, including the A9 field sweep.
 - `reseal/controls.py` - benign controls C0-C4.
 - `reseal/runner.py`, `reseal/report.py`, `reseal/cli.py` - run and summarise.
@@ -62,5 +63,27 @@ Not done before the sprint:
 
 ## What is new in the sprint (13-15 November 2026)
 
-To be filled in as it happens: claims coding by two coders, the full
-experiment, any added tools or attacks, analysis, Claims Cards and the report.
+13 November:
+
+- Documentation snapshots saved for each tool (`claims/snapshots/`).
+- Claims coded from those snapshots (`claims/claims_coder1.csv`).
+- The reported experiment, run from scratch: `results/main/` (1,000 events,
+  seeds 0 to 4) and a robustness run, `results/robust_n100/` (100 events,
+  seeds 5 to 9).
+- New code: `reseal/analyze.py` (labels, Claims Cards, figure),
+  `reseal/numbers.py` (recomputes every number in the report),
+  `reseal/quotecheck.py` (checks coded quotes against the snapshots),
+  `tests/test_analyze.py`, `report/build.py`.
+- The report: `report/ReSeal_report.md` and `.pdf`.
+- The fifth tool was moved out of the repository and renamed Tool E in all
+  files. The two earlier commits were rewritten for that purpose only: the
+  adapter file became a stub and the tool's name was replaced. Their dates
+  and messages are the original ones.
+
+Changes to pre-sprint code during the sprint, all small:
+
+- `reseal/adapters/__init__.py`: the fifth adapter is loaded only when present.
+- `reseal/runner.py`: no version or verifier messages are written for a
+  withheld tool.
+- No attack, control, workload or named-tool adapter was changed after the
+  pilot.
