@@ -17,6 +17,7 @@ SNAP = Path(__file__).resolve().parent.parent / "claims" / "snapshots"
 # (tool, source column) -> snapshot file
 SOURCES = {
     ("halo-record", "README.md"): "halo_record.README.md",
+    ("halo-record", "LIMITS.md"): "halo_record.LIMITS.md",
     ("witnesskit", "README.md"): "witnesskit.README.md",
     ("witnesskit", "SECURITY.md"): "witnesskit.SECURITY.md",
     ("signet", "README.md"): "signet.repo.README.md",

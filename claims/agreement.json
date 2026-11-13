@@ -1,0 +1,122 @@
+{
+  "cells": 55,
+  "raw_agreement": 0.673,
+  "cohens_kappa": 0.524,
+  "agreement_by_tool": {
+    "agent-receipts": 0.545,
+    "halo-record": 0.545,
+    "signet": 0.455,
+    "tool-e": 1.0,
+    "witnesskit": 0.818
+  },
+  "disagreements": [
+    {
+      "tool": "agent-receipts",
+      "property": "capture",
+      "coder1": "silent",
+      "coder2": "disclaims"
+    },
+    {
+      "tool": "agent-receipts",
+      "property": "delete",
+      "coder1": "claims",
+      "coder2": "silent"
+    },
+    {
+      "tool": "agent-receipts",
+      "property": "forge",
+      "coder1": "silent",
+      "coder2": "claims_with_setup"
+    },
+    {
+      "tool": "agent-receipts",
+      "property": "reorder",
+      "coder1": "claims",
+      "coder2": "silent"
+    },
+    {
+      "tool": "agent-receipts",
+      "property": "rewrite",
+      "coder1": "disclaims",
+      "coder2": "silent"
+    },
+    {
+      "tool": "halo-record",
+      "property": "backdate",
+      "coder1": "silent",
+      "coder2": "disclaims"
+    },
+    {
+      "tool": "halo-record",
+      "property": "delete",
+      "coder1": "claims_with_setup",
+      "coder2": "claims"
+    },
+    {
+      "tool": "halo-record",
+      "property": "fork",
+      "coder1": "claims_with_setup",
+      "coder2": "silent"
+    },
+    {
+      "tool": "halo-record",
+      "property": "reorder",
+      "coder1": "claims",
+      "coder2": "claims_with_setup"
+    },
+    {
+      "tool": "halo-record",
+      "property": "truncate",
+      "coder1": "claims_with_setup",
+      "coder2": "claims"
+    },
+    {
+      "tool": "signet",
+      "property": "backdate",
+      "coder1": "silent",
+      "coder2": "claims"
+    },
+    {
+      "tool": "signet",
+      "property": "delete",
+      "coder1": "claims",
+      "coder2": "disclaims"
+    },
+    {
+      "tool": "signet",
+      "property": "downgrade",
+      "coder1": "silent",
+      "coder2": "claims_with_setup"
+    },
+    {
+      "tool": "signet",
+      "property": "edit",
+      "coder1": "claims",
+      "coder2": "disclaims"
+    },
+    {
+      "tool": "signet",
+      "property": "forge",
+      "coder1": "claims_with_setup",
+      "coder2": "claims"
+    },
+    {
+      "tool": "signet",
+      "property": "insert",
+      "coder1": "silent",
+      "coder2": "claims_with_setup"
+    },
+    {
+      "tool": "witnesskit",
+      "property": "forge",
+      "coder1": "claims",
+      "coder2": "claims_with_setup"
+    },
+    {
+      "tool": "witnesskit",
+      "property": "truncate",
+      "coder1": "claims_with_setup",
+      "coder2": "disclaims"
+    }
+  ]
+}

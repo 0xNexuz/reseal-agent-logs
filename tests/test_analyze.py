@@ -49,3 +49,10 @@ def test_every_coded_quote_is_in_its_snapshot():
 
     root = Path(__file__).resolve().parent.parent
     assert check(root / "claims" / "claims_coder1.csv") == []
+
+
+def test_second_coder_quotes_are_in_their_snapshots_too():
+    from reseal.quotecheck import check
+
+    root = Path(__file__).resolve().parent.parent
+    assert check(root / "claims" / "claims_coder2.csv") == []
