@@ -1,6 +1,6 @@
 # ReSeal: Do Tamper-Evident Agent Logs Hold Up Against Their Own Operator?
 
-Eleazar [add surname],
+Eleazar Ekhosu
 
 With Apart Research. Research conducted at the AI x Epistemics Research Sprint, November 13 to 15, 2026.
 
