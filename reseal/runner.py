@@ -10,7 +10,7 @@ import time
 from importlib import metadata
 from pathlib import Path
 
-from . import adapters
+from . import adapters, checkpoint
 from .adapters import ACCEPTED, ERROR, NotApplicable, Verdict
 from .attacks import ATTACKS, POSITIONS, Ctx, coverage_sweep
 from .controls import CONTROLS
@@ -21,7 +21,7 @@ FIELDS = ["tool", "version", "setup", "seed", "n", "kind", "id", "name", "tier",
 
 
 def _version(adapter) -> str:
-    if getattr(adapter, "withheld", False):
+    if getattr(adapter, "withheld", False) or not adapter.package:
         return ""
     try:
         return metadata.version(adapter.package)
@@ -48,8 +48,11 @@ def run_matrix(tools=None, seeds=(0,), n=200, setups=("default", "strong"),
     for tool in tools:
         adapter = adapters.get(tool)
         version = _version(adapter)
+        base_adapter = adapter
         for setup in setups:
             strong = setup == "strong"
+            # sprint work: the checkpoint setups wrap the tool's default verifier
+            adapter = checkpoint.wrap(base_adapter, setup) if setup in checkpoint.SETUPS else base_adapter
             for seed in seeds:
                 events = generate(n, seed)
                 root = Path(tempfile.mkdtemp(prefix=f"reseal_{tool}_{setup}_{seed}_"))
@@ -122,6 +125,7 @@ def run_matrix(tools=None, seeds=(0,), n=200, setups=("default", "strong"),
         "tools": {t: {"version": _version(adapters.get(t)),
                       "default_setup": adapters.get(t).default_setup,
                       "strong_setup": adapters.get(t).strong_setup} for t in tools},
+        "setup_notes": {s: checkpoint.describe(s) for s in setups if s in checkpoint.SETUPS},
         "baselines": baselines, "trials": len(rows),
     }
     (out / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")

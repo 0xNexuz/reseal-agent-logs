@@ -6,6 +6,7 @@ from pathlib import Path
 from .base import (ACCEPTED, ERROR, INCONCLUSIVE, REJECTED, Adapter, NotApplicable, Run, Verdict)
 from .halo import HaloAdapter
 from .obsigna_ import ObsignaAdapter
+from .plain import PlainAdapter
 from .signet import SignetAdapter
 from .witnesskit_ import WitnessKitAdapter
 
@@ -34,12 +35,16 @@ def _load_withheld():
 _load_withheld()
 
 
+# Not a tool under test: an unprotected log, used as a baseline (sprint work).
+BASELINES = [PlainAdapter]
+
+
 def get(name: str) -> Adapter:
-    for cls in ALL:
+    for cls in ALL + BASELINES:
         if cls.name == name:
             return cls()
     raise KeyError(f"unknown tool {name!r}; known: {[c.name for c in ALL]}")
 
 
-__all__ = ["ALL", "get", "Adapter", "Run", "Verdict", "NotApplicable",
+__all__ = ["ALL", "BASELINES", "get", "Adapter", "Run", "Verdict", "NotApplicable",
            "ACCEPTED", "REJECTED", "INCONCLUSIVE", "ERROR"]
