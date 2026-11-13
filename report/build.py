@@ -65,7 +65,7 @@ def html() -> str:
     body = body.replace("<table>", '<div class="t"><table>').replace("</table>", "</table></div>")
     # references and appendices start on a new page: they do not count toward the page limit
     body = body.replace('<h2 id="references">', '<h2 id="references" class="newpage">')
-    return f"<!doctype html><html lang='en'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{body}</body></html>"
+    return f"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>ReSeal: Do Tamper-Evident Agent Logs Hold Up Against Their Own Operator?</title><style>{CSS}</style></head><body>{body}</body></html>"
 
 
 def main():
