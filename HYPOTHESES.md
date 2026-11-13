@@ -3,6 +3,11 @@
 Written on 8-9 November 2026, before the experiment. Committed before any
 reported run so the story cannot be fitted to the data afterwards.
 
+Note added 13 November: two pilot runs were made on 9 November (see
+`PRE_SPRINT.md`), so these were not written blind to all data. H4 in
+particular may reflect a pilot observation. The report reads the outcomes as
+descriptive, not confirmatory.
+
 ## Questions
 
 1. **Claims.** What security properties do agent audit-log tools claim, and is

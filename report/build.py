@@ -35,6 +35,8 @@ th, td { border-bottom: 0.5pt solid #bbb; padding: 2.5pt 4pt; text-align: left; 
 th { border-bottom: 1pt solid #111; border-top: 1pt solid #111; }
 tr { break-inside: avoid; }
 img { width: 100%; margin: 4pt 0 2pt; }
+.fig { break-inside: avoid; }
+.fig img { width: 92%; display: block; margin: 4pt auto 3pt; }
 h2#abstract { text-align: center; font-size: 11pt; margin-top: 6pt; }
 h2#abstract + p { margin: 0 9mm 8pt; font-size: 10pt; }
 h2.newpage { break-before: page; }
@@ -56,6 +58,11 @@ def html() -> str:
 
     body = markdown.markdown(text, extensions=["tables", "sane_lists", "toc"])
     body = re.sub(r'<img alt="([^"]*)" src="([^"]+)"\s*/?>', inline_image, body)
+    # keep a figure and its caption together
+    body = re.sub(r'<p>(<img [^>]+>)</p>\s*<p>(<em>Figure .*?</em>)</p>',
+                  r'<div class="fig">\1<p>\2</p></div>', body, flags=re.S)
+    # keep each table on one page
+    body = body.replace("<table>", '<div class="t"><table>').replace("</table>", "</table></div>")
     # references and appendices start on a new page: they do not count toward the page limit
     body = body.replace('<h2 id="references">', '<h2 id="references" class="newpage">')
     return f"<!doctype html><html lang='en'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{body}</body></html>"

@@ -8,6 +8,7 @@ Recomputed from the trial files in `results/main`, `results/robust_n100` and `re
 - Robustness run (default, strong; 100 events; seeds 5-9): 4172 trials; 876 cells; cells whose outcome differs between seeds: 0; clean logs accepted 50/50; benign controls flagged 0/220; control rows that do not apply: 30; attack rows that do not apply (the attack changes nothing): 10
 - Checkpoint run (checkpoint, checkpoint-stale, baseline default; 1,000 events; seeds 0-4): 5286 trials; 1095 cells; cells whose outcome differs between seeds: 0; clean logs accepted 65/65; benign controls flagged 0/295; control rows that do not apply: 30; attack rows that do not apply (the attack changes nothing): 70
 - Distinct cells, main plus checkpoint run: 1959
+- Cells present on fewer than five seeds (field-sweep cells whose field exists only in some workloads): 77
 - Cells shared by the main and robustness runs: 840; with a different outcome: 0
 
 ## Detection counts, main run (refused / shown)

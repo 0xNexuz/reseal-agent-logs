@@ -107,6 +107,15 @@ def numbers() -> str:
     c_rob = run_checks(rob, rmeta, add, "Robustness run (default, strong; 100 events; seeds 5-9)")
     c_lay = run_checks(lay, lmeta, add, "Checkpoint run (checkpoint, checkpoint-stale, baseline default; 1,000 events; seeds 0-4)")
     add(f"- Distinct cells, main plus checkpoint run: {len(c_main) + len(c_lay)}")
+    few = 0
+    for run_rows in (rows, lay):
+        seeds = defaultdict(set)
+        for r in run_rows:
+            pos = "" if r["kind"] == "coverage" else r["position"]
+            seeds[(r["tool"], r["setup"], r["kind"], r["id"], r["variant"], pos)].add(r["seed"])
+        few += sum(len(v) < 5 for v in seeds.values())
+    add(f"- Cells present on fewer than five seeds (field-sweep cells whose field exists only in some "
+        f"workloads): {few}")
     shared = set(c_main) & set(c_rob)
     add(f"- Cells shared by the main and robustness runs: {len(shared)}; with a different outcome: "
         f"{sum(c_main[k] != c_rob[k] for k in shared)}\n")

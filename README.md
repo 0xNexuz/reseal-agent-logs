@@ -148,8 +148,8 @@ recording and verifying code.
 ## Ground rules
 
 - Attacks run only on logs this harness generates locally.
-- A suspected flaw is reported to the tool's maintainer before details are
-  published (`docs/DISCLOSURE_TEMPLATE.md`).
+- Details of a suspected flaw (the tool's name, how to reproduce it) are not
+  published before its maintainer has been told (`docs/DISCLOSURE_TEMPLATE.md`).
 - Each tool is judged first against its own claims.
 
 ## Licence
