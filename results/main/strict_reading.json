@@ -1,0 +1,58 @@
+[
+  {
+    "tool": "witnesskit",
+    "property": "delete",
+    "setup": "default",
+    "refused": 15,
+    "shown": 20
+  },
+  {
+    "tool": "signet",
+    "property": "delete",
+    "setup": "default",
+    "refused": 15,
+    "shown": 20
+  },
+  {
+    "tool": "signet",
+    "property": "delete",
+    "setup": "strong",
+    "refused": 15,
+    "shown": 20
+  },
+  {
+    "tool": "agent-receipts",
+    "property": "delete",
+    "setup": "default",
+    "refused": 15,
+    "shown": 20
+  },
+  {
+    "tool": "tool-e",
+    "property": "edit",
+    "setup": "default",
+    "refused": 0,
+    "shown": 40
+  },
+  {
+    "tool": "tool-e",
+    "property": "edit",
+    "setup": "strong",
+    "refused": 0,
+    "shown": 40
+  },
+  {
+    "tool": "tool-e",
+    "property": "forge",
+    "setup": "default",
+    "refused": 0,
+    "shown": 40
+  },
+  {
+    "tool": "tool-e",
+    "property": "forge",
+    "setup": "strong",
+    "refused": 0,
+    "shown": 40
+  }
+]

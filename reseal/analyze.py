@@ -100,6 +100,41 @@ def label(strength, kind, setup, out, wired=True) -> str:
     return "caught (unstated)" if caught else "silent miss"
 
 
+
+# -- sensitivity: a stricter reading of the documentation ----------------------
+#
+# The main labels let a specific statement govern over a headline, and count
+# deletion of the last record as truncation (a tool that says "truncation needs
+# an expected head" has disclosed it). The strict reading does neither: any
+# unconditional "claims" statement about a property governs, and deleting the
+# last record is a deletion.
+STRICT_PROPERTIES = [
+    ("edit", ("A1", "A2"), None), ("delete", ("A3",), None), ("truncate", ("A4",), None),
+    ("reorder", ("A5",), None), ("insert", ("A6", "A7"), None), ("backdate", ("A8",), None),
+    ("downgrade", ("A10",), None), ("forge", ("A11",), None), ("rewrite", ("A12",), None),
+    ("fork", ("A13",), None), ("capture", ("A14",), None),
+]
+
+
+def strict_violations(rows, claims, tools, setups):
+    """(tool, property, setup, refused, shown) where an unconditional claim meets a miss."""
+    by = defaultdict(list)
+    for r in rows:
+        if r["kind"] == "attack" and r["applicable"]:
+            by[(r["tool"], r["setup"], r["id"])].append(r)
+    out = []
+    for tool in tools:
+        for prop, ids, _ in STRICT_PROPERTIES:
+            if not any(c["strength"] == "claims" for c in claims.get((tool, prop), [])):
+                continue
+            for setup in setups:
+                rs = [r for i in ids for r in by[(tool, setup, i)]]
+                d = sum(r["detected"] for r in rs)
+                if rs and d < len(rs):
+                    out.append((tool, prop, setup, d, len(rs)))
+    return out
+
+
 def build(out_dir, claims_path):
     rows, meta = load(out_dir)
     claims = load_claims(claims_path)
@@ -270,6 +305,11 @@ def main(argv=None):
     counts = defaultdict(int)
     for r in table:
         counts[(r["setup"], r["label"])] += 1
+    claims = load_claims(a.claims)
+    strict = strict_violations(rows, claims, list(meta["tools"]), meta["setups"])
+    (Path(a.out) / "strict_reading.json").write_text(json.dumps(
+        [dict(tool=t, property=p, setup=s, refused=d, shown=n) for t, p, s, d, n in strict], indent=2),
+        encoding="utf-8")
     (Path(a.out) / "label_counts.json").write_text(
         json.dumps({f"{k[0]}|{k[1]}": v for k, v in sorted(counts.items())}, indent=2), encoding="utf-8")
 

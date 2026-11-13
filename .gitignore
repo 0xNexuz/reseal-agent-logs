@@ -7,6 +7,11 @@ __pycache__/
 private/
 # runs: only the reported ones are tracked
 results/*
+!results/TOOL_E_COMMITMENT.md
+!results/REPORT_NUMBERS.md
+!results/APPENDIX_C.md
+!results/fig_main.png
+!results/layer/
 !results/main/
 !results/robust_n100/
 report/ReSeal_report.html
