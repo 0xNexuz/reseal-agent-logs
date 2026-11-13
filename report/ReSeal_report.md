@@ -149,7 +149,7 @@ One tampering suite, run against five open-source agent audit-log tools, shows t
 
 ## Code and Data
 
-Code, the claims sheets, saved documentation snapshots and every trial are in the project repository: github.com/0xNexuz/reseal. It leaves out the Tool E adapter (Appendix A). The file `results/REPORT_NUMBERS.md` recomputes every number in this report from the trial files. No dataset with personal data is used; the workload is synthetic.
+Code, the claims sheets, saved documentation snapshots and every trial are in the project repository: github.com/0xNexuz/reseal-agent-logs. It leaves out the Tool E adapter (Appendix A). The file `results/REPORT_NUMBERS.md` recomputes every number in this report from the trial files. No dataset with personal data is used; the workload is synthetic.
 
 ## Author Contributions
 
